@@ -1,5 +1,4 @@
 {
-  "extends": "tsconfig/nextjs.json",
   "display": "Node LTS",
   "_version": "18.1.0",
   "compilerOptions": {

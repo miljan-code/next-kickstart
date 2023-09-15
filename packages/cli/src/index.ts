@@ -2,7 +2,7 @@
 
 import { Command } from 'commander';
 import { getPackageInfo } from './utils/get-package-info.js';
-import { init } from './commands/init/init.js';
+import { init } from './commands/init/index.js';
 
 function main() {
   const packageInfo = getPackageInfo();
