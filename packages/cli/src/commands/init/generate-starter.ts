@@ -1,4 +1,4 @@
-import fs from 'node:fs';
+import fs from 'fs-extra';
 import path from 'node:path';
 import { type PackageManager } from '../../utils/get-user-pkg-manager.js';
 import { PKG_ROOT } from '../../constants.js';
@@ -20,7 +20,10 @@ export async function generateStarter({
 
   logger.info(`\nUsing: ${pkgManager}\n`);
 
-  const loader = ora(`Initializing project in: ${projectDir}...\n`).start();
+  const loader = ora(`Initializing project in: ${projectDir}...\n`);
+  loader.start();
 
-  process.exit(0);
+  fs.copySync(srcDir, projectDir);
+
+  loader.succeed(`${projectName} initialized successfuly`);
 }

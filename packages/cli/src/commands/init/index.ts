@@ -24,11 +24,18 @@ export const init = new Command()
 
     const pkgManager = getUserPkgManager();
     const projectDir = parsePath(initDir);
-    const projectName = dir === '.' ? DEFAULT_APP_NAME : dir;
+    const projectName = initDir === '.' ? DEFAULT_APP_NAME : initDir;
 
     intro('next-kickstart');
 
     const packages = await showPrompts();
 
+    // Generate starter next app
     await generateStarter({ pkgManager, projectDir, projectName });
+
+    // Add packages
+
+    // Run install
+
+    process.exit(0);
   });

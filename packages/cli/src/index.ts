@@ -8,7 +8,7 @@ function main() {
   const packageInfo = getPackageInfo();
 
   const program = new Command()
-    .name('kickstart-next')
+    .name('next-kickstart')
     .description('create next app with drizzle, trpc, nextauth and tailwind')
     .version(
       packageInfo.version || '0.1.0',
