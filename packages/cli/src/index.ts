@@ -1,19 +1,19 @@
 #!/usr/bin/env node
 
-import { Command } from 'commander';
-import { getPackageInfo } from './utils/get-package-info.js';
-import { init } from './commands/init/index.js';
+import { Command } from "commander";
+import { getPackageInfo } from "./utils/get-package-info.js";
+import { init } from "./commands/init/index.js";
 
 function main() {
   const packageInfo = getPackageInfo();
 
   const program = new Command()
-    .name('next-kickstart')
-    .description('create next app with drizzle, trpc, nextauth and tailwind')
+    .name("next-kickstart")
+    .description("create next app with drizzle, trpc, nextauth and tailwind")
     .version(
-      packageInfo.version || '0.1.0',
-      '-v, --version',
-      'display the version number'
+      packageInfo.version || "0.1.0",
+      "-v, --version",
+      "display the version number",
     );
 
   program.addCommand(init);

@@ -1,6 +1,6 @@
-import { drizzleInstaller } from './drizzle.js';
-import { nextAuthInstaller } from './next-auth.js';
-import { type Packages } from '../helpers/prompts.js';
+import { drizzleInstaller } from "./drizzle.js";
+import { nextAuthInstaller } from "./next-auth.js";
+import { type Packages } from "../helpers/prompts.js";
 
 export const mapPackages = (packages: Packages) => ({
   drizzle: {

@@ -1,5 +1,5 @@
-import fs from 'node:fs';
-import path from 'node:path';
+import fs from "node:fs";
+import path from "node:path";
 
 export function parsePath(dir: string) {
   const projectPath = path.join(process.cwd(), dir);
