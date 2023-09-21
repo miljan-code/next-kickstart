@@ -1,6 +1,6 @@
 import { confirm, group } from '@clack/prompts';
 
-export async function showPrompts() {
+export async function checkPackages() {
   return await group(
     {
       drizzle: () => {
@@ -23,19 +23,27 @@ export async function showPrompts() {
           message: 'Would you like to use ShadCN/ui?',
         });
       },
-      ...{
-        git: () => {
-          return confirm({
-            message: 'Should we initialize a Git repository?',
-          });
-        },
+    },
+    {
+      onCancel() {
+        process.exit(1);
       },
-      ...{
-        install: () => {
-          return confirm({
-            message: 'Should we install dependencies for you?',
-          });
-        },
+    }
+  );
+}
+
+export async function checkInstalls() {
+  return await group(
+    {
+      git: () => {
+        return confirm({
+          message: 'Should we initialize a Git repository?',
+        });
+      },
+      deps: () => {
+        return confirm({
+          message: 'Should we install dependencies for you?',
+        });
       },
     },
     {
@@ -45,3 +53,5 @@ export async function showPrompts() {
     }
   );
 }
+
+export type Packages = Awaited<ReturnType<typeof checkPackages>>;
