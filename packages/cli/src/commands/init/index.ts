@@ -43,6 +43,8 @@ export const init = new Command()
 
     // Create ENV
 
+    // Copy providers && edit layout
+
     // Install deps
 
     process.exit(0);

@@ -15,6 +15,10 @@ const dependencyList: Dependency[] = [
     name: 'drizzle-orm',
     version: '^0.28.5',
   },
+  {
+    name: 'postgres',
+    version: '^3.3.5',
+  },
 ];
 const devDependencyList: Dependency[] = [
   {
@@ -53,7 +57,7 @@ export const drizzleInstaller = ({
   };
   fs.writeJSONSync(pkgJsonPath, pkgJson, { spaces: 2 });
 
-  // 4. get paths of files to copy
+  // 3. get paths of files to copy
   const drizzleDir = path.join(PKG_ROOT, 'template/libs/drizzle');
 
   const configSrc = path.join(drizzleDir, 'drizzle.config.ts');
@@ -69,7 +73,7 @@ export const drizzleInstaller = ({
   );
   const schemaDest = path.join(projectDir, 'db/schema/index.ts');
 
-  // 5. copy files
+  // 4. copy files
   fs.copySync(configSrc, configDest);
   fs.mkdirSync(path.join(projectDir, 'db/schema'), { recursive: true });
   fs.copySync(clientSrc, clientDest);
