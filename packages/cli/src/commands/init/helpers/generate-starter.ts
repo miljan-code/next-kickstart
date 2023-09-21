@@ -23,17 +23,16 @@ export async function generateStarter({
 
   logger.info(`\nUsing: ${pkgManager}\n`);
 
-  const loader = ora(`Initializing project in: ${projectDir}...\n`);
-  loader.start();
+  const loader = ora(`\nInitializing project in: ${projectDir}...`).start();
 
   fs.copySync(srcDir, projectDir);
 
-  logger.success(`${projectName} initialized successfuly`);
-  logger.info('Initializing git repository...');
+  logger.info('\nInitializing git repository...');
 
   if (initGit) {
     await execa('git', ['init', '.'], { cwd: projectDir });
   }
 
-  loader.succeed(`${projectName} initialized successfuly`);
+  loader.succeed();
+  logger.success(`\n${projectName} initialized successfuly`);
 }
