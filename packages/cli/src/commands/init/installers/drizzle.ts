@@ -49,7 +49,6 @@ export const drizzleInstaller = ({
 
   // 4. copy files
   fs.copySync(configSrc, configDest);
-  fs.mkdirSync(path.join(projectDir, "db/schema"), { recursive: true });
   fs.copySync(clientSrc, clientDest);
   fs.copySync(schemaSrc, schemaDest);
 };

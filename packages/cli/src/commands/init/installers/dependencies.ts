@@ -19,6 +19,13 @@ export const dependencies = {
   "@trpc/react-query": "^10.38.0",
   "@trpc/server": "^10.38.0",
   superjson: "^1.13.1",
+
+  // ShadCN/ui
+  "class-variance-authority": "^0.7.0",
+  clsx: "^2.0.0",
+  "lucide-react": "^0.269.0",
+  "tailwind-merge": "^1.14.0",
+  "tailwindcss-animate": "^1.0.6",
 };
 
 export type Dependency = keyof typeof dependencies;

@@ -38,9 +38,7 @@ export const nextAuthInstaller = ({
   );
 
   // 3. copy files
-  fs.copyFileSync(authTypesSrc, authTypesDest);
-  fs.mkdirSync(path.dirname(authLibDest), { recursive: true });
-  fs.copyFileSync(authLibSrc, authLibDest);
-  fs.mkdirSync(path.dirname(apiHandlerDest), { recursive: true });
-  fs.copyFileSync(apiHandlerSrc, apiHandlerDest);
+  fs.copySync(authTypesSrc, authTypesDest);
+  fs.copySync(authLibSrc, authLibDest);
+  fs.copySync(apiHandlerSrc, apiHandlerDest);
 };
