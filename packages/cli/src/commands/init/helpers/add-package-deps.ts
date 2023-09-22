@@ -1,7 +1,7 @@
 import fs from "fs-extra";
 import sortPackageJson from "sort-package-json";
+import { dependencies, type Dependency } from "../installers/dependencies.js";
 import { type PackageJson } from "type-fest";
-import { type Dependency } from "../installers/drizzle.js";
 
 interface AddPackageDepsOpts {
   deps: Dependency[];
@@ -16,11 +16,13 @@ export const addPackageDeps = ({
 }: AddPackageDepsOpts) => {
   const pkgJson = fs.readJSONSync(pkgJsonPath) as PackageJson;
 
-  deps.forEach((pkg) => {
+  deps.forEach((pkgName) => {
+    const pkgVersion = dependencies[pkgName];
+
     if (isDev && pkgJson.devDependencies) {
-      pkgJson.devDependencies[pkg.name] = pkg.version;
+      pkgJson.devDependencies[pkgName] = pkgVersion;
     } else if (pkgJson.dependencies) {
-      pkgJson.dependencies[pkg.name] = pkg.version;
+      pkgJson.dependencies[pkgName] = pkgVersion;
     }
   });
   const sortedPkgJson = sortPackageJson(pkgJson);

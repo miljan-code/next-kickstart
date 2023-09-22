@@ -2,42 +2,9 @@ import path from "node:path";
 import fs from "fs-extra";
 import { addPackageDeps } from "../helpers/add-package-deps.js";
 import { InstallPackagesOpts } from "../helpers/install-packages.js";
-import { type PackageJson } from "type-fest";
 import { PKG_ROOT } from "@/constants.js";
-
-export interface Dependency {
-  name: string;
-  version: string;
-}
-
-const dependencyList: Dependency[] = [
-  {
-    name: "drizzle-orm",
-    version: "^0.28.5",
-  },
-  {
-    name: "postgres",
-    version: "^3.3.5",
-  },
-];
-const devDependencyList: Dependency[] = [
-  {
-    name: "drizzle-kit",
-    version: "^0.19.13",
-  },
-  {
-    name: "pg",
-    version: "^8.11.3",
-  },
-  {
-    name: "dotenv",
-    version: "^16.3.1",
-  },
-  {
-    name: "@types/pg",
-    version: "^8.10.2",
-  },
-];
+import { type PackageJson } from "type-fest";
+import { type Dependency } from "./dependencies.js";
 
 export const drizzleInstaller = ({
   projectDir,
@@ -46,16 +13,15 @@ export const drizzleInstaller = ({
   const pkgJsonPath = path.join(projectDir, "package.json");
 
   // 1. add deps to package.json
-  addPackageDeps({ deps: dependencyList, isDev: false, pkgJsonPath });
-  addPackageDeps({ deps: devDependencyList, isDev: true, pkgJsonPath });
+  const deps: Dependency[] = ["drizzle-orm", "postgres"];
+  if (packages.nextauth) deps.push("@auth/core");
 
-  if (packages.nextauth) {
-    addPackageDeps({
-      deps: [{ name: "@auth/core", version: "^0.12.0" }],
-      isDev: false,
-      pkgJsonPath,
-    });
-  }
+  addPackageDeps({ deps, isDev: false, pkgJsonPath });
+  addPackageDeps({
+    deps: ["drizzle-kit", "pg", "dotenv", "@types/pg"],
+    isDev: true,
+    pkgJsonPath,
+  });
 
   // 2. add generate script to package.json
   const pkgJson = fs.readJSONSync(pkgJsonPath) as PackageJson;

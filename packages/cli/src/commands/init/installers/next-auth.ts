@@ -3,22 +3,7 @@ import fs from "fs-extra";
 import { addPackageDeps } from "../helpers/add-package-deps.js";
 import { InstallPackagesOpts } from "../helpers/install-packages.js";
 import { PKG_ROOT } from "@/constants.js";
-
-export interface Dependency {
-  name: string;
-  version: string;
-}
-
-const dependencyList: Dependency[] = [
-  {
-    name: "@auth/drizzle-adapter",
-    version: "^0.3.2",
-  },
-  {
-    name: "next-auth",
-    version: "^4.23.1",
-  },
-];
+import { type Dependency } from "./dependencies.js";
 
 export const nextAuthInstaller = ({
   projectDir,
@@ -27,7 +12,9 @@ export const nextAuthInstaller = ({
   const pkgJsonPath = path.join(projectDir, "package.json");
 
   // 1. add deps to package.json
-  addPackageDeps({ deps: dependencyList, isDev: false, pkgJsonPath });
+  const deps: Dependency[] = ["next-auth"];
+  if (packages.drizzle) deps.push("@auth/drizzle-adapter");
+  addPackageDeps({ deps, isDev: false, pkgJsonPath });
 
   // 2. get paths of files to copy
   const nextAuthDir = path.join(PKG_ROOT, "template/libs/next-auth");
