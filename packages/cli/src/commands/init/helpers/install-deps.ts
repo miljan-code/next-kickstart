@@ -1,5 +1,5 @@
-import { getUserPkgManager } from "@/utils/get-user-pkg-manager.js";
-import { logger } from "@/utils/logger.js";
+import { getUserPkgManager } from "../../../utils/get-user-pkg-manager.js";
+import { logger } from "../../../utils/logger.js";
 import { execa } from "execa";
 
 export const installDeps = async (projectDir: string) => {

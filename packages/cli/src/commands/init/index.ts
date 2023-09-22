@@ -8,9 +8,16 @@ import { DEFAULT_APP_NAME } from "../../constants.js";
 import { checkPackages, checkInstalls } from "./helpers/prompts.js";
 import { installPackages } from "./helpers/install-packages.js";
 import { createEnv } from "./helpers/create-env.js";
-import { logger } from "@/utils/logger.js";
+import { logger } from "../../utils/logger.js";
 import { installDeps } from "./helpers/install-deps.js";
-import { providersInstaller } from "./installers/providers.js";
+import { generateKickstartConfig } from "./helpers/generate-kickstart-config.js";
+
+const ALL_PACKAGES = {
+  drizzle: true,
+  nextauth: true,
+  trpc: true,
+  shadcn: true,
+};
 
 const initOptionsSchema = z.object({
   yes: z.boolean(),
@@ -24,7 +31,7 @@ export const init = new Command()
   .argument("[dir]", "directory to init a project", ".")
   .option("-y, --yes", "skip confirmation prompt", false)
   .action(async (dir, opts) => {
-    const options = initOptionsSchema.parse(opts);
+    const { yes: fullInstall } = initOptionsSchema.parse(opts);
     const initDir = initDirSchema.parse(dir);
 
     const pkgManager = getUserPkgManager();
@@ -33,11 +40,11 @@ export const init = new Command()
 
     intro("next-kickstart");
 
-    const packages = await checkPackages();
+    const packages = fullInstall ? ALL_PACKAGES : await checkPackages();
     const installs = await checkInstalls();
 
-    const initGit = installs.git;
-    const shouldInstallDeps = installs.deps;
+    const initGit = fullInstall ? true : installs.git;
+    const shouldInstallDeps = fullInstall ? true : installs.deps;
 
     // Generate starter next app
     await generateStarter({ pkgManager, projectDir, projectName, initGit });
@@ -48,13 +55,11 @@ export const init = new Command()
     // Create ENV
     createEnv({ projectDir, packages });
 
-    // Copy providers && edit layout
-    providersInstaller({ projectDir, packages });
+    // Generate config JSON file
+    generateKickstartConfig({ projectDir, packages });
 
     // Install deps
     if (shouldInstallDeps) await installDeps(projectDir);
-
-    // Generate config JSON file
 
     outro("successfully initialized");
     logger.success("\nHappy hacking!\n");
