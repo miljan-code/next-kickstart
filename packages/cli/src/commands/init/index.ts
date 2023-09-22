@@ -7,6 +7,7 @@ import { intro } from "@clack/prompts";
 import { DEFAULT_APP_NAME } from "../../constants.js";
 import { checkPackages, checkInstalls } from "./helpers/prompts.js";
 import { installPackages } from "./helpers/install-packages.js";
+import { createEnv } from "./helpers/create-env.js";
 
 const initOptionsSchema = z.object({
   yes: z.boolean(),
@@ -42,6 +43,7 @@ export const init = new Command()
     installPackages({ projectDir, packages });
 
     // Create ENV
+    createEnv({ projectDir, packages });
 
     // Copy providers && edit layout
 
