@@ -10,6 +10,7 @@ import { installPackages } from "./helpers/install-packages.js";
 import { createEnv } from "./helpers/create-env.js";
 import { logger } from "@/utils/logger.js";
 import { installDeps } from "./helpers/install-deps.js";
+import { providersInstaller } from "./installers/providers.js";
 
 const initOptionsSchema = z.object({
   yes: z.boolean(),
@@ -48,6 +49,7 @@ export const init = new Command()
     createEnv({ projectDir, packages });
 
     // Copy providers && edit layout
+    providersInstaller({ projectDir, packages });
 
     // Install deps
     if (shouldInstallDeps) await installDeps(projectDir);
