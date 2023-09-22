@@ -2,7 +2,7 @@ import path from "node:path";
 import fs from "fs-extra";
 import { addPackageDeps } from "../helpers/add-package-deps.js";
 import { InstallPackagesOpts } from "../helpers/install-packages.js";
-import { PKG_ROOT } from "@/constants.js";
+import { PKG_ROOT } from "../../../constants.js";
 
 export const shadcnInstaller = ({
   projectDir,
@@ -35,6 +35,9 @@ export const shadcnInstaller = ({
   const uiSrc = path.join(shadcnDir, "components/ui/button.tsx");
   const uiDest = path.join(projectDir, "components/ui/button.tsx");
 
+  const twConfigSrc = path.join(shadcnDir, "tailwind.config.ts");
+  const twConfigDest = path.join(projectDir, "tailwind.config.ts");
+
   if (!packages.trpc) {
     const utilsSrc = path.join(shadcnDir, "lib/utils.ts");
     const utilsDest = path.join(shadcnDir, "lib/utils.ts");
@@ -45,4 +48,5 @@ export const shadcnInstaller = ({
   fs.copySync(configSrc, configDest);
   fs.copySync(stylesSrc, stylesDest);
   fs.copySync(uiSrc, uiDest);
+  fs.copySync(twConfigSrc, twConfigDest);
 };

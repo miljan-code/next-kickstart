@@ -3,11 +3,13 @@ import { z } from "zod";
 import { generateStarter } from "./helpers/generate-starter.js";
 import { parsePath } from "./helpers/parse-path.js";
 import { getUserPkgManager } from "../../utils/get-user-pkg-manager.js";
-import { intro } from "@clack/prompts";
+import { intro, outro } from "@clack/prompts";
 import { DEFAULT_APP_NAME } from "../../constants.js";
 import { checkPackages, checkInstalls } from "./helpers/prompts.js";
 import { installPackages } from "./helpers/install-packages.js";
 import { createEnv } from "./helpers/create-env.js";
+import { logger } from "@/utils/logger.js";
+import { installDeps } from "./helpers/install-deps.js";
 
 const initOptionsSchema = z.object({
   yes: z.boolean(),
@@ -34,7 +36,7 @@ export const init = new Command()
     const installs = await checkInstalls();
 
     const initGit = installs.git;
-    const installDeps = installs.deps;
+    const shouldInstallDeps = installs.deps;
 
     // Generate starter next app
     await generateStarter({ pkgManager, projectDir, projectName, initGit });
@@ -48,6 +50,11 @@ export const init = new Command()
     // Copy providers && edit layout
 
     // Install deps
+    if (shouldInstallDeps) await installDeps(projectDir);
 
+    // Generate config JSON file
+
+    outro("successfully initialized");
+    logger.success("\nHappy hacking!\n");
     process.exit(0);
   });

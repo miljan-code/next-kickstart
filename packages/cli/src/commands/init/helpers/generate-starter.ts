@@ -21,8 +21,6 @@ export async function generateStarter({
 }: GenerateStarterOptions) {
   const srcDir = path.join(PKG_ROOT, "template/base");
 
-  logger.info(`\nUsing: ${pkgManager}\n`);
-
   const loader = ora(`\nInitializing project in: ${projectDir}...`).start();
 
   fs.copySync(srcDir, projectDir);

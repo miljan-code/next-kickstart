@@ -1,4 +1,4 @@
-import { logger } from "@/utils/logger.js";
+import { logger } from "../../../utils/logger.js";
 import { mapPackages } from "../installers/index.js";
 import { type Packages } from "./prompts.js";
 

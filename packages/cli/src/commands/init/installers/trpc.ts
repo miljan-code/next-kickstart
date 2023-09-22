@@ -2,7 +2,7 @@ import path from "node:path";
 import fs from "fs-extra";
 import { addPackageDeps } from "../helpers/add-package-deps.js";
 import { InstallPackagesOpts } from "../helpers/install-packages.js";
-import { PKG_ROOT } from "@/constants.js";
+import { PKG_ROOT } from "../../../constants.js";
 
 export const trpcInstaller = ({
   projectDir,
@@ -41,7 +41,7 @@ export const trpcInstaller = ({
 
   const trpcServerFile =
     packages.drizzle && packages.nextauth
-      ? "server-with-db-auth"
+      ? "server-with-db-auth.ts"
       : packages.drizzle
       ? "server-with-db.ts"
       : packages.nextauth
@@ -52,7 +52,7 @@ export const trpcInstaller = ({
 
   const trpcInitFile =
     packages.drizzle && packages.nextauth
-      ? "trpc-with-db-auth"
+      ? "trpc-with-db-auth.ts"
       : packages.drizzle
       ? "trpc-with-db.ts"
       : packages.nextauth
