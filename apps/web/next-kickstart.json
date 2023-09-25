@@ -1,0 +1,6 @@
+{
+  "drizzle": false,
+  "nextauth": false,
+  "trpc": false,
+  "shadcn": true
+}
