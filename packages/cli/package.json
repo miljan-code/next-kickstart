@@ -18,7 +18,8 @@
   "files": [
     "dist",
     "template",
-    "packages.json"
+    "packages.json",
+    "README.md"
   ],
   "scripts": {
     "dev": "tsc -w",
