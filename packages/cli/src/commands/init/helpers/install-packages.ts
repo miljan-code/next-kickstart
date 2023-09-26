@@ -19,8 +19,6 @@ export const installPackages = ({
 
   for (const [pkgName, pkgOpts] of Object.entries(mappedPackages)) {
     if (!pkgOpts.added) return;
-
-    logger.info(`\nAdding ${pkgName} files...`);
     pkgOpts.install({ projectDir, packages });
     logger.success(`\nSuccessfully added ${pkgName}`);
   }

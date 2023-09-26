@@ -43,8 +43,8 @@ export const init = new Command()
     const packages = fullInstall ? ALL_PACKAGES : await checkPackages();
     const installs = await checkInstalls();
 
-    const initGit = fullInstall ? true : installs.git;
-    const shouldInstallDeps = fullInstall ? true : installs.deps;
+    const initGit = installs.git;
+    const shouldInstallDeps = installs.deps;
 
     // Generate starter next app
     await generateStarter({ pkgManager, projectDir, projectName, initGit });

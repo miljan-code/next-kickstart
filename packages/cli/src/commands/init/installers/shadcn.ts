@@ -18,6 +18,7 @@ export const shadcnInstaller = ({
       "lucide-react",
       "tailwind-merge",
       "tailwindcss-animate",
+      "@radix-ui/react-slot",
     ],
     isDev: false,
     pkgJsonPath,
@@ -46,7 +47,7 @@ export const shadcnInstaller = ({
 
   // 3. copy files
   fs.copySync(configSrc, configDest);
-  fs.copySync(stylesSrc, stylesDest);
+  fs.copySync(stylesSrc, stylesDest, { overwrite: true });
   fs.copySync(uiSrc, uiDest);
-  fs.copySync(twConfigSrc, twConfigDest);
+  fs.copySync(twConfigSrc, twConfigDest, { overwrite: true });
 };

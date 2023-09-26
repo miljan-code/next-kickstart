@@ -5,7 +5,7 @@ import { execa } from "execa";
 export const installDeps = async (projectDir: string) => {
   const pkgManager = getUserPkgManager();
 
-  logger.info(`Installing dependencies using ${pkgManager}`);
+  logger.info(`\nInstalling dependencies using ${pkgManager}`);
 
   await execa(`${pkgManager}`, ["install"], { cwd: projectDir });
 

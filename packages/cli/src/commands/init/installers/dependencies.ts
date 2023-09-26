@@ -21,6 +21,7 @@ export const dependencies = {
   superjson: "^1.13.1",
 
   // ShadCN/ui
+  "@radix-ui/react-slot": "^1.0.2",
   "class-variance-authority": "^0.7.0",
   clsx: "^2.0.0",
   "lucide-react": "^0.269.0",
