@@ -1,6 +1,6 @@
 {
-  "name": "create-next-kickstart",
-  "version": "0.0.2",
+  "name": "next-kickstart",
+  "version": "0.0.0",
   "type": "module",
   "license": "MIT",
   "publishConfig": {
