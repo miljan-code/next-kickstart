@@ -16,7 +16,8 @@
     "directory": "packages/cli"
   },
   "files": [
-    "dist"
+    "dist",
+    "template"
   ],
   "scripts": {
     "dev": "tsc -w",
