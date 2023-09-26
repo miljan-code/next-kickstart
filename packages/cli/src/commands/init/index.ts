@@ -1,6 +1,5 @@
 import { Command } from "commander";
 import { z } from "zod";
-import { intro, outro } from "@clack/prompts";
 
 import { generateStarter } from "./helpers/generate-starter.js";
 import { parsePath } from "./helpers/parse-path.js";
@@ -9,8 +8,8 @@ import { installPackages } from "./helpers/install-packages.js";
 import { createEnv } from "./helpers/create-env.js";
 import { installDeps } from "./helpers/install-deps.js";
 import { generateKickstartConfig } from "./helpers/generate-kickstart-config.js";
-import { getUserPkgManager } from "../../utils/get-user-pkg-manager.js";
 import { logger } from "../../utils/logger.js";
+import { renderTitle } from "../../utils/render-title.js";
 import { DEFAULT_APP_NAME } from "../../constants.js";
 
 const ALL_PACKAGES = {
@@ -35,11 +34,10 @@ export const init = new Command()
     const { yes: fullInstall } = initOptionsSchema.parse(opts);
     const initDir = initDirSchema.parse(dir);
 
-    const pkgManager = getUserPkgManager();
     const projectDir = parsePath(initDir);
     const projectName = initDir === "." ? DEFAULT_APP_NAME : initDir;
 
-    intro("next-kickstart");
+    renderTitle();
 
     const packages = fullInstall ? ALL_PACKAGES : await checkPackages();
     const installs = await checkInstalls();
@@ -48,7 +46,7 @@ export const init = new Command()
     const shouldInstallDeps = installs.deps;
 
     // Generate starter next app
-    await generateStarter({ projectDir, projectName, initGit });
+    await generateStarter({ projectDir, initGit });
 
     // Add packages
     installPackages({ projectDir, packages });
@@ -62,7 +60,7 @@ export const init = new Command()
     // Install deps
     if (shouldInstallDeps) await installDeps(projectDir);
 
-    outro("successfully initialized");
+    logger.info("Project has been successfully initialized");
     logger.success("\nHappy hacking!\n");
     process.exit(0);
   });

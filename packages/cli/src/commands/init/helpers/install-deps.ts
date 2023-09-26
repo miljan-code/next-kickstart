@@ -1,4 +1,5 @@
 import { execa } from "execa";
+import ora from "ora";
 
 import { getUserPkgManager } from "../../../utils/get-user-pkg-manager.js";
 import { logger } from "../../../utils/logger.js";
@@ -6,7 +7,9 @@ import { logger } from "../../../utils/logger.js";
 export const installDeps = async (projectDir: string) => {
   const pkgManager = getUserPkgManager();
 
-  logger.info(`\nInstalling dependencies using ${pkgManager}`);
+  console.log("");
+  const loader = ora(`Installing dependencies using ${pkgManager}`).start();
   await execa(`${pkgManager}`, ["install"], { cwd: projectDir });
-  logger.success(`Dependencies has been installed successfully`);
+  loader.stop();
+  logger.info(`Dependencies has been installed successfully`);
 };

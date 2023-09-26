@@ -1,3 +1,6 @@
+import ora from "ora";
+import chalk from "chalk";
+
 import { mapPackages } from "../installers/index.js";
 import { providersInstaller } from "../installers/providers.js";
 import { logger } from "../../../utils/logger.js";
@@ -20,7 +23,10 @@ export const installPackages = ({
   for (const [pkgName, pkgOpts] of Object.entries(mappedPackages)) {
     if (!pkgOpts.added) return;
     pkgOpts.install({ projectDir, packages });
-    logger.success(`\nSuccessfully added ${pkgName}`);
+    const loader = ora(`Boilerplating ${pkgName}`).start();
+    loader.succeed(
+      chalk.green(`Successfully added ${chalk.green.bold(pkgName)}`),
+    );
   }
 
   providersInstaller({ projectDir, packages });
