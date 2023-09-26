@@ -26,7 +26,11 @@
 
 </div>
 
+<div align="center">
+
 ![img](https://utfs.io/f/3ae6eec0-eb85-44f6-9e54-f52bcf5cc76b-i95bpb.jpg)
+
+</div>
 
 ## Table of contents
 
