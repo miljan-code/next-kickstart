@@ -1,4 +1,5 @@
-import { confirm, group } from "@clack/prompts";
+import path from "node:path";
+import { confirm, group, text } from "@clack/prompts";
 
 export async function checkPackages() {
   return await group(
@@ -52,6 +53,38 @@ export async function checkInstalls() {
       },
     },
   );
+}
+
+const getProjectNamePrompt = async () => {
+  const prompt = await text({
+    message: "What is the project name?",
+    placeholder: "next-kickstart",
+    validate(value) {
+      if (!value.length) return "Project name is required!";
+    },
+  });
+
+  const projectName = typeof prompt === "symbol" ? prompt.toString() : prompt;
+
+  return projectName.split(" ").join("-");
+};
+
+export async function getProjectName(dir: string | undefined) {
+  let projectName = "";
+  let dirName = "";
+
+  if (!dir) {
+    projectName = await getProjectNamePrompt();
+    dirName = projectName;
+  } else if (dir === ".") {
+    projectName = path.basename(process.cwd());
+    dirName = ".";
+  } else {
+    projectName = dir;
+    dirName = dir;
+  }
+
+  return { projectName, dirName };
 }
 
 export type Packages = Awaited<ReturnType<typeof checkPackages>>;

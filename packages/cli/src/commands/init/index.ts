@@ -3,13 +3,18 @@ import { z } from "zod";
 
 import { generateStarter } from "./helpers/generate-starter.js";
 import { parsePath } from "./helpers/parse-path.js";
-import { checkPackages, checkInstalls } from "./helpers/prompts.js";
+import {
+  checkPackages,
+  checkInstalls,
+  getProjectName,
+} from "./helpers/prompts.js";
 import { installPackages } from "./helpers/install-packages.js";
 import { createEnv } from "./helpers/create-env.js";
 import { installDeps } from "./helpers/install-deps.js";
 import { generateKickstartConfig } from "./helpers/generate-kickstart-config.js";
 import { logger } from "@/utils/logger.js";
 import { renderTitle } from "@/utils/render-title.js";
+import { DEFAULT_APP_NAME } from "@/constants.js";
 
 const ALL_PACKAGES = {
   drizzle: true,
@@ -27,14 +32,15 @@ const initDirSchema = z.string().min(1);
 export const init = new Command()
   .name("init")
   .description("initialize new project")
-  .argument("[dir]", "directory to init a project", ".")
+  .argument("[dir]", "directory to init a project")
   .option("-y, --yes", "skip confirmation prompt", false)
-  .action(async (dir: string, opts: string) => {
-    const { yes: fullInstall } = initOptionsSchema.parse(opts);
-    const initDir = initDirSchema.parse(dir);
-    const projectDir = parsePath(initDir);
-
+  .action(async (dir: string | undefined, opts: string) => {
     renderTitle();
+
+    const { projectName, dirName } = await getProjectName(dir);
+    const { yes: fullInstall } = initOptionsSchema.parse(opts);
+    const initDir = initDirSchema.parse(dirName);
+    const projectDir = parsePath(initDir);
 
     const packages = fullInstall ? ALL_PACKAGES : await checkPackages();
     const installs = await checkInstalls();
@@ -43,7 +49,7 @@ export const init = new Command()
     const shouldInstallDeps = installs.deps;
 
     // Generate starter next app
-    await generateStarter({ projectDir, initGit });
+    await generateStarter({ projectDir, projectName, initGit });
 
     // Add packages
     installPackages({ projectDir, packages });
