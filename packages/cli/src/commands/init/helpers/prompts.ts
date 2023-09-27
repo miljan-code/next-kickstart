@@ -64,7 +64,7 @@ const getProjectNamePrompt = async () => {
     },
   });
 
-  const projectName = typeof prompt === "symbol" ? prompt.toString() : prompt;
+  const projectName = typeof prompt === "symbol" ? process.exit(1) : prompt;
 
   return projectName.split(" ").join("-");
 };

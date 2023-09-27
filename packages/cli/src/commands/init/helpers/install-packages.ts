@@ -19,6 +19,7 @@ export const installPackages = ({
 
   const mappedPackages = mapPackages(packages);
 
+  console.log("");
   for (const [pkgName, pkgOpts] of Object.entries(mappedPackages)) {
     if (!pkgOpts.added) return;
     pkgOpts.install({ projectDir, packages });
@@ -27,6 +28,7 @@ export const installPackages = ({
       chalk.green(`Successfully added ${chalk.green.bold(pkgName)}`),
     );
   }
+  console.log("");
 
   providersInstaller({ projectDir, packages });
 };

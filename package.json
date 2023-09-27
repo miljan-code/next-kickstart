@@ -5,7 +5,7 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "start:cli": "node packages/cli/dist/index.js init test-proj"
+    "start:cli": "node packages/cli/dist/index.js"
   },
   "devDependencies": {
     "eslint": "^8.48.0",
