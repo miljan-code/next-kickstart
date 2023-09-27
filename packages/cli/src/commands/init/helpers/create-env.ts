@@ -31,7 +31,10 @@ export const createEnv = ({ packages, projectDir }: InstallPackagesOpts) => {
     }
   }
 
-  const envPath = path.join(projectDir, ".env.example");
+  if (packages.drizzle || packages.nextauth) {
+    const envPath = path.join(projectDir, ".env.example");
+    fs.writeFileSync(envPath, envContent);
+  }
 
   const t3EnvFile =
     packages.drizzle && packages.nextauth
@@ -44,6 +47,5 @@ export const createEnv = ({ packages, projectDir }: InstallPackagesOpts) => {
   const t3EnvSrc = path.join(PKG_ROOT, "template/libs/providers", t3EnvFile);
   const t3EnvDest = path.join(projectDir, "env.mjs");
 
-  fs.writeFileSync(envPath, envContent);
   fs.copySync(t3EnvSrc, t3EnvDest);
 };

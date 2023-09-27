@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  Get started with the <a rel="noopener noreferrer" target="_blank" href="https://kickstart.miljan.xyz">Next Kickstart</a> by running <code>npx next-kickstart init</code>
+  Get started with the <a rel="noopener noreferrer" target="_blank" href="https://kickstart.miljan.xyz">Next Kickstart</a> by running <code>npx next-kickstart</code>
 </p>
 
 <div align="center">
@@ -65,25 +65,25 @@ commands and answer the command prompt questions:
 ### npm
 
 ```bash
-npx next-kickstart init <folder name>
+npx next-kickstart <folder name>
 ```
 
 ### yarn
 
 ```bash
-yarn next-kickstart init <folder name>
+yarn next-kickstart <folder name>
 ```
 
 ### pnpm
 
 ```bash
-pnpm dlx next-kickstart init <folder name>
+pnpm dlx next-kickstart <folder name>
 ```
 
 ### bun
 
 ```bash
-bunx next-kickstart init <folder name>
+bunx next-kickstart <folder name>
 ```
 
 For more advanced usage, check out the

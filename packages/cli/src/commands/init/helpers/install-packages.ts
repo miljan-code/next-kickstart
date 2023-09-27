@@ -21,7 +21,7 @@ export const installPackages = ({
 
   console.log("");
   for (const [pkgName, pkgOpts] of Object.entries(mappedPackages)) {
-    if (!pkgOpts.added) return;
+    if (!pkgOpts.added) continue;
     pkgOpts.install({ projectDir, packages });
     const loader = ora(`Boilerplating ${pkgName}`).start();
     loader.succeed(

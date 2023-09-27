@@ -42,7 +42,7 @@ export const shadcnInstaller = ({
 
   if (!packages.trpc) {
     const utilsSrc = path.join(shadcnDir, "lib/utils.ts");
-    const utilsDest = path.join(shadcnDir, "lib/utils.ts");
+    const utilsDest = path.join(projectDir, "lib/utils.ts");
     fs.copySync(utilsSrc, utilsDest);
   }
 
