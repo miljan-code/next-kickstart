@@ -1,6 +1,7 @@
 import path from "node:path";
 import fs from "fs-extra";
-import { PKG_ROOT } from "../../../constants.js";
+
+import { PKG_ROOT } from "@/constants.js";
 import { type InstallPackagesOpts } from "./install-packages.js";
 
 export const createEnv = ({ packages, projectDir }: InstallPackagesOpts) => {

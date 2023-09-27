@@ -2,7 +2,7 @@ import path from "node:path";
 import fs from "fs-extra";
 
 import { InstallPackagesOpts } from "./install-packages.js";
-import { PKG_ROOT } from "../../../constants.js";
+import { PKG_ROOT } from "@/constants.js";
 
 export const generateKickstartConfig = ({
   packages,

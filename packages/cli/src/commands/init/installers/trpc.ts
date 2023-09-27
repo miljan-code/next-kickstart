@@ -2,8 +2,8 @@ import path from "node:path";
 import fs from "fs-extra";
 
 import { addPackageDeps } from "../helpers/add-package-deps.js";
-import { InstallPackagesOpts } from "../helpers/install-packages.js";
-import { PKG_ROOT } from "../../../constants.js";
+import { type InstallPackagesOpts } from "../helpers/install-packages.js";
+import { PKG_ROOT } from "@/constants.js";
 
 export const trpcInstaller = ({
   projectDir,

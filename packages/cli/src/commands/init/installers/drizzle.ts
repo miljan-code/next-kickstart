@@ -3,7 +3,7 @@ import fs from "fs-extra";
 
 import { addPackageDeps } from "../helpers/add-package-deps.js";
 import { InstallPackagesOpts } from "../helpers/install-packages.js";
-import { PKG_ROOT } from "../../../constants.js";
+import { PKG_ROOT } from "@/constants.js";
 import { type PackageJson } from "type-fest";
 import { type Dependency } from "./dependencies.js";
 

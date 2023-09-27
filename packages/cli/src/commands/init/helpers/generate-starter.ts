@@ -2,8 +2,8 @@ import fs from "fs-extra";
 import path from "node:path";
 import { execa } from "execa";
 
-import { logger } from "../../../utils/logger.js";
-import { PKG_ROOT } from "../../../constants.js";
+import { logger } from "@/utils/logger.js";
+import { PKG_ROOT } from "@/constants.js";
 
 interface GenerateStarterOptions {
   projectDir: string;

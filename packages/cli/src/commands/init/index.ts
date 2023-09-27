@@ -8,9 +8,8 @@ import { installPackages } from "./helpers/install-packages.js";
 import { createEnv } from "./helpers/create-env.js";
 import { installDeps } from "./helpers/install-deps.js";
 import { generateKickstartConfig } from "./helpers/generate-kickstart-config.js";
-import { logger } from "../../utils/logger.js";
-import { renderTitle } from "../../utils/render-title.js";
-import { DEFAULT_APP_NAME } from "../../constants.js";
+import { logger } from "@/utils/logger.js";
+import { renderTitle } from "@/utils/render-title.js";
 
 const ALL_PACKAGES = {
   drizzle: true,
@@ -30,12 +29,10 @@ export const init = new Command()
   .description("initialize new project")
   .argument("[dir]", "directory to init a project", ".")
   .option("-y, --yes", "skip confirmation prompt", false)
-  .action(async (dir, opts) => {
+  .action(async (dir: string, opts: string) => {
     const { yes: fullInstall } = initOptionsSchema.parse(opts);
     const initDir = initDirSchema.parse(dir);
-
     const projectDir = parsePath(initDir);
-    const projectName = initDir === "." ? DEFAULT_APP_NAME : initDir;
 
     renderTitle();
 

@@ -1,8 +1,8 @@
 import { execa } from "execa";
 import ora from "ora";
 
-import { getUserPkgManager } from "../../../utils/get-user-pkg-manager.js";
-import { logger } from "../../../utils/logger.js";
+import { getUserPkgManager } from "@/utils/get-user-pkg-manager.js";
+import { logger } from "@/utils/logger.js";
 
 export const installDeps = async (projectDir: string) => {
   const pkgManager = getUserPkgManager();
