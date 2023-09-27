@@ -19,7 +19,7 @@ export const drizzleInstaller = ({
 
   addPackageDeps({ deps, isDev: false, pkgJsonPath });
   addPackageDeps({
-    deps: ["drizzle-kit", "pg", "dotenv", "@types/pg"],
+    deps: ["drizzle-kit", "dotenv"],
     isDev: true,
     pkgJsonPath,
   });

@@ -4,8 +4,8 @@ export const dependencies = {
   "drizzle-orm": "^0.28.5",
   postgres: "^3.3.5",
   dotenv: "^16.3.1",
-  "@types/pg": "^8.10.2",
-  pg: "^8.11.3",
+  // "@types/pg": "^8.10.2",
+  // pg: "^8.11.3",
   "@auth/core": "^0.12.0",
 
   // NextAuth

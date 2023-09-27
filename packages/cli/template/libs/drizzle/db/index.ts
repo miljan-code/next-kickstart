@@ -1,11 +1,12 @@
-import { drizzle } from "drizzle-orm/node-postgres";
-import { Pool } from "pg";
+import { drizzle } from "drizzle-orm/postgres-js";
+import { migrate } from "drizzle-orm/postgres-js/migrator";
+import postgres from "postgres";
 
 import * as schema from "@/db/schema";
 import { env } from "@/env.mjs";
 
-const pool = new Pool({
-  connectionString: env.DATABASE_URL,
-});
+const client = postgres(env.DATABASE_URL);
 
-export const db = drizzle(pool, { schema });
+export const db = drizzle(client, { schema });
+
+await migrate(db, { migrationsFolder: "./migrations" });
