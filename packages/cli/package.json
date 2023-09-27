@@ -26,7 +26,6 @@
     "build": "tsup",
     "lint": "tsc",
     "ci": "pnpm lint && pnpm build",
-    "release": "changeset version",
     "pub:release": "pnpm build && pnpm publish --access public"
   },
   "exports": "./dist/index.js",
