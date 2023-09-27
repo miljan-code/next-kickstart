@@ -7,5 +7,9 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  return <NextThemeProvider>{children}</NextThemeProvider>;
+  return (
+    <NextThemeProvider enableSystem defaultTheme="system">
+      {children}
+    </NextThemeProvider>
+  );
 };
