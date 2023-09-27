@@ -8,6 +8,7 @@
     "start:cli": "node packages/cli/dist/index.js"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.26.2",
     "eslint": "^8.48.0",
     "prettier": "^3.0.3",
     "turbo": "latest"

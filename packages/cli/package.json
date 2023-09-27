@@ -1,5 +1,5 @@
 {
-  "name": "kickstart-next",
+  "name": "next-kickstart",
   "version": "0.0.0",
   "type": "module",
   "license": "MIT",
@@ -22,9 +22,11 @@
     "README.md"
   ],
   "scripts": {
-    "typecheck": "tsc",
-    "build": "tsup",
     "dev": "tsup --watch",
+    "build": "tsup",
+    "lint": "tsc",
+    "ci": "pnpm lint && pnpm build",
+    "release": "changeset version",
     "pub:release": "pnpm build && pnpm publish --access public"
   },
   "exports": "./dist/index.js",

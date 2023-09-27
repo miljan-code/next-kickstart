@@ -90,9 +90,9 @@ For more advanced usage, check out the
 [docs](https://docs.kickstart.miljan.xyz).
 
 [downloads-image]:
-  https://img.shields.io/npm/dm/kickstart-next?color=364fc7&logoColor=364fc7
-[npm-url]: https://www.npmjs.com/package/kickstart-next
+  https://img.shields.io/npm/dm/next-kickstart?color=364fc7&logoColor=364fc7
+[npm-url]: https://www.npmjs.com/package/next-kickstart
 [npm-image]:
-  https://img.shields.io/npm/v/kickstart-next?color=0b7285&logoColor=0b7285
+  https://img.shields.io/npm/v/next-kickstart?color=0b7285&logoColor=0b7285
 [contribute-url]: https://github.com/miljan-code/next-kickstart
 [contribute-image]: https://img.shields.io/badge/PRs-welcome-blue.svg
