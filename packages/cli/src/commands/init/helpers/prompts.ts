@@ -57,7 +57,7 @@ export async function checkInstalls() {
 
 const getProjectNamePrompt = async () => {
   const prompt = await text({
-    message: "What is the project name?",
+    message: "What will your project be called?",
     placeholder: "next-kickstart",
     validate(value) {
       if (!value.length) return "Project name is required!";

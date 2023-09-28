@@ -9,7 +9,7 @@
   position: relative;
   display: flex;
   justify-content: center;
-  padding: 60px 24px 160px 24px;
+  padding: 24px;
 }
 
 .main:before {
