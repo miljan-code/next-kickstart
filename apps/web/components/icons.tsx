@@ -1,9 +1,9 @@
-import { ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 type IconProps = React.HTMLAttributes<SVGElement>;
 
 export const Icons = {
-  chevronRight: ChevronRight,
+  arrowRight: ArrowRight,
   github: (props: IconProps) => (
     <svg viewBox="0 0 438.549 438.549" {...props}>
       <path

@@ -9,7 +9,7 @@ export const CodeCard = () => {
       aria-hidden="true"
     >
       <div
-        className="h-[300px] overflow-hidden rounded-lg border border-border bg-white/5 px-3 pb-6 
+        className="h-[300px] overflow-hidden rounded-lg border border-border bg-foreground/5 px-3 pb-6 
          pt-4 font-mono text-[10px] leading-normal subpixel-antialiased shadow-lg transition-all sm:h-[400px] sm:px-2 sm:text-xs md:px-5"
       >
         <div className="top mb-6 flex">
@@ -22,7 +22,7 @@ export const CodeCard = () => {
           <Typist.Delay ms={1250} />
         </Typist>
         <Typist
-          className="leading-1 to-tertiary translate-y-[-0.2rem] bg-gradient-to-r from-primary via-secondary bg-clip-text font-mono text-[7px] text-transparent sm:text-sm md:translate-y-[-0.4rem]"
+          className="leading-1 translate-y-[-0.2rem] bg-gradient-to-r from-primary via-secondary to-tertiary bg-clip-text font-mono text-[7px] text-transparent sm:text-sm md:translate-y-[-0.4rem]"
           cursor={{ show: false }}
           avgTypingDelay={-500}
         >
@@ -33,7 +33,7 @@ export const CodeCard = () => {
           <br />
           |&nbsp;|/&nbsp;/&nbsp;_&nbsp;&nbsp;___|&nbsp;|&nbsp;_____|&nbsp;|_&nbsp;__&nbsp;_&nbsp;_&nbsp;__|&nbsp;|_&nbsp;
           <br />
-          |&nbsp;&nbsp;&nbsp;&nbsp;\|&nbsp;|/&nbsp;__|&nbsp;|/&nbsp;/&nbsp;__|&nbsp;__/&nbsp;_&nbsp;|&nbsp;__|&nbsp;__|
+          |&nbsp;&nbsp;&nbsp;&nbsp;\|&nbsp;|/&nbsp;__|&nbsp;|/&nbsp;/&nbsp;__|&nbsp;__/&nbsp;_&nbsp;|&nbsp;__|&nbsp;|&nbsp;&nbsp;_|
           <br />
           |&nbsp;|\&nbsp;&nbsp;\&nbsp;|&nbsp;(__|&nbsp;&nbsp;&nbsp;\__&nbsp;\|&nbsp;|&nbsp;(_|&nbsp;|&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;|_&nbsp;
           <br />
@@ -51,7 +51,7 @@ export const CodeCard = () => {
             <Typist
               cursor={{ hideWhenDone: true, hideWhenDoneDelay: 0 }}
               avgTypingDelay={50}
-              className="text-tertiary inline pl-1"
+              className="inline pl-1 text-tertiary"
             >
               &nbsp;next-kickstart
             </Typist>
@@ -76,7 +76,7 @@ export const CodeCard = () => {
           >
             <span>
               <span>? Would you like to use Drizzle ORM?</span>
-              <span className="text-tertiary pl-2">Yes</span>
+              <span className="pl-2 text-tertiary">Yes</span>
             </span>
           </Typist>
         </Typist>
@@ -100,7 +100,7 @@ export const CodeCard = () => {
           >
             <span>
               <span>? Would you like to use NextAuth?</span>
-              <span className="text-tertiary pl-2">Yes</span>
+              <span className="pl-2 text-tertiary">Yes</span>
             </span>
           </Typist>
         </Typist>
@@ -124,7 +124,7 @@ export const CodeCard = () => {
           >
             <span>
               <span>? Would you like to use tRPC?</span>
-              <span className="text-tertiary pl-2">Yes</span>
+              <span className="pl-2 text-tertiary">Yes</span>
             </span>
           </Typist>
         </Typist>
@@ -148,7 +148,7 @@ export const CodeCard = () => {
           >
             <span>
               <span>? Would you like to use shadcn/ui?</span>
-              <span className="text-tertiary pl-2">Yes</span>
+              <span className="pl-2 text-tertiary">Yes</span>
             </span>
           </Typist>
         </Typist>
@@ -156,7 +156,7 @@ export const CodeCard = () => {
           cursor={{ show: false }}
           startDelay={11700}
           avgTypingDelay={-10000}
-          className="translate-y-[-6.3rem] text-green-400 sm:translate-y-[-7rem]"
+          className="text-success translate-y-[-6.3rem] sm:translate-y-[-7rem]"
         >
           <Typist.Delay ms={1000} />
           The project has been initialized successfully.

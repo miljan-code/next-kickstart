@@ -65,12 +65,12 @@
   transform: translateZ(0);
 }
 
-[data-theme="dark"] .main:before {
-  background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #161616 100%);
-}
-
 [data-theme="light"] .main:before {
   background: radial-gradient(circle, rgba(255, 255, 255, 0) 0, #ffffffc7 100%);
+}
+
+[data-theme="dark"] .main:before {
+  background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #161616 100%);
 }
 
 [data-theme="dark"] .main:after {
