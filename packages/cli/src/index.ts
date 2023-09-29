@@ -3,6 +3,7 @@
 import { Command } from "commander";
 import { getPackageInfo } from "./utils/get-package-info.js";
 import { init, initAction } from "./commands/init/index.js";
+import { add } from "./commands/add/index.js";
 
 function main() {
   const packageInfo = getPackageInfo();
@@ -20,6 +21,7 @@ function main() {
     .action(initAction);
 
   program.addCommand(init);
+  program.addCommand(add);
 
   program.parse();
 }
