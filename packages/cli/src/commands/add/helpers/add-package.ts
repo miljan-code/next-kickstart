@@ -8,7 +8,7 @@ interface AddPackageOpts {
 }
 
 export const addPackage = async ({ packages, pkgName }: AddPackageOpts) => {
-  const mappedPkgs = mapPackages(packages);
+  const mappedPkgs = mapPackages();
   const projectDir = process.cwd();
 
   await mappedPkgs[pkgName]({ packages, projectDir });

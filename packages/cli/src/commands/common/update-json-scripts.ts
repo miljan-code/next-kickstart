@@ -1,10 +1,18 @@
+import { getUserPkgExec } from "@/utils/get-user-pkg-manager.js";
 import fs from "fs-extra";
 import { type PackageJson } from "type-fest";
 
-export const pkgScripts = {
-  drizzle: {
-    "db:generate": "drizzle-kit generate:pg --config=drizzle.config.ts",
-  },
+export const pkgScripts = () => {
+  const pkgExec = getUserPkgExec();
+
+  return {
+    drizzle: {
+      "db:generate": "drizzle-kit generate:pg --config=drizzle.config.ts",
+    },
+    shadcn: {
+      "add:ui": `${pkgExec} shadcn-ui@latest add`,
+    },
+  };
 };
 
 export const addScriptsToPkgJSON = (

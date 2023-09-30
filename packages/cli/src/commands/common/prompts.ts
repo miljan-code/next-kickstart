@@ -1,5 +1,7 @@
 import path from "node:path";
+
 import { confirm, group, text } from "@clack/prompts";
+import chalk from "chalk";
 
 export async function checkPackages() {
   return await group(
@@ -54,6 +56,13 @@ export async function checkInstalls() {
     },
   );
 }
+
+export const overwritePrompt = async (msg: string) => {
+  const shouldOverwrite = await confirm({
+    message: chalk.yellow.bold(msg),
+  });
+  if (!shouldOverwrite) process.exit(0);
+};
 
 const getProjectNamePrompt = async () => {
   const prompt = await text({

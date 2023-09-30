@@ -28,7 +28,7 @@ export const drizzleInstaller = ({
   });
 
   // 2. add generate script to package.json
-  addScriptsToPkgJSON(pkgJsonPath, pkgScripts.drizzle);
+  addScriptsToPkgJSON(pkgJsonPath, pkgScripts().drizzle);
 
   // 3. get paths of files to copy
   const drizzleDir = path.join(PKG_ROOT, "template/libs/drizzle");

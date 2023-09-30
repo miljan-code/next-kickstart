@@ -94,7 +94,7 @@ export const drizzleInstaller = async ({
 
   // Add migration generation script
   const pkgJsonPath = path.join(projectDir, "package.json");
-  addScriptsToPkgJSON(pkgJsonPath, pkgScripts.drizzle);
+  addScriptsToPkgJSON(pkgJsonPath, pkgScripts().drizzle);
 
   // Update next-kickstarter config
   updateKickstartConfig(projectDir, "drizzle");
