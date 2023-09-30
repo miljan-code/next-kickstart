@@ -12,9 +12,9 @@ import { parsePath } from "./helpers/parse-path.js";
 import { installPackages } from "./helpers/install-packages.js";
 import { createEnv } from "../common/update-env.js";
 import { installDeps } from "./helpers/install-deps.js";
-import { printNextSteps } from "./helpers/print-next-steps.js";
 import { logger } from "@/utils/logger.js";
 import { renderTitle } from "@/utils/render-title.js";
+import { getUserPkgManager } from "@/utils/get-user-pkg-manager.js";
 
 const ALL_PACKAGES = {
   drizzle: true,
@@ -49,8 +49,13 @@ export const initAction = async (dir: string | undefined, opts: string) => {
   generateKickstartConfig({ projectDir, packages });
   if (shouldInstallDeps) await installDeps(projectDir);
 
+  const pkgManager = getUserPkgManager();
   logger.info("Project has been successfully initialized");
-  printNextSteps({ packages, projectName, shouldInstallDeps });
+  logger.info("\nNext steps:");
+  projectName !== "." && logger.info(`  cd ${projectName}`);
+  if (!shouldInstallDeps) logger.info(`  ${pkgManager} install`);
+  if (packages.drizzle) logger.info(`  ${pkgManager} run db:generate`);
+  logger.info(`  ${pkgManager} run dev`);
   logger.success("\nHappy hacking!\n");
   process.exit(0);
 };
