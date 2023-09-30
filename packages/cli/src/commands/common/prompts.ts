@@ -61,7 +61,7 @@ export const overwritePrompt = async (msg: string) => {
   const shouldOverwrite = await confirm({
     message: chalk.yellow.bold(msg),
   });
-  if (!shouldOverwrite) process.exit(0);
+  if (!shouldOverwrite || typeof shouldOverwrite === "symbol") process.exit(0);
 };
 
 const getProjectNamePrompt = async () => {
