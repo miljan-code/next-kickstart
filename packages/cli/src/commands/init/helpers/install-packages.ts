@@ -3,7 +3,7 @@ import chalk from "chalk";
 
 import { mapPackages } from "../installers/index.js";
 import { providersInstaller } from "../installers/providers.js";
-import { type Packages } from "./prompts.js";
+import { type Packages } from "@/commands/common/prompts.js";
 
 export interface InstallPackagesOpts {
   packages: Packages;

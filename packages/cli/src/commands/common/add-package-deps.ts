@@ -2,7 +2,10 @@ import fs from "fs-extra";
 import sortPackageJson from "sort-package-json";
 import { type PackageJson } from "type-fest";
 
-import { dependencies, type Dependency } from "../installers/dependencies.js";
+import {
+  dependencies,
+  type Dependency,
+} from "@/commands/common/dependencies.js";
 
 interface AddPackageDepsOpts {
   deps: Dependency[];

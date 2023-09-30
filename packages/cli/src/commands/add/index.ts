@@ -2,23 +2,21 @@ import { Command } from "commander";
 
 import { checkArgument } from "./helpers/check-argument.js";
 import { getPackagesList } from "./helpers/get-package-list.js";
-import { initPkg } from "./helpers/init-pkg.js";
+import { addPackage } from "./helpers/add-package.js";
 
-export const addAction = async (arg: string | undefined) => {
-  // 1. check arg and get pkg name
-  const pkg = checkArgument(arg);
+export const addAction = async (pkg: string | undefined) => {
+  console.log("");
 
-  // 2. get pkg list
-  const packages = getPackagesList(pkg);
+  const pkgName = checkArgument(pkg);
+  const packages = getPackagesList(pkgName);
 
-  // 3. init pkg
-  initPkg(packages, pkg);
+  await addPackage({ packages, pkgName });
 
   process.exit(0);
 };
 
 export const add = new Command()
   .name("add")
-  .description("initialize new project")
-  .argument("[arg]", "package to install inside current project")
+  .description("add new package")
+  .argument("[pkg]", "package to install inside current project")
   .action(addAction);

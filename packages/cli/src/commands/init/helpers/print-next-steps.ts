@@ -1,6 +1,6 @@
 import { getUserPkgManager } from "@/utils/get-user-pkg-manager.js";
 import { logger } from "@/utils/logger.js";
-import { type Packages } from "./prompts.js";
+import { type Packages } from "@/commands/common/prompts.js";
 
 interface PrintNextStepsOpts {
   packages: Packages;

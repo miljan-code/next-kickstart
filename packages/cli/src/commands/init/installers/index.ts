@@ -2,7 +2,7 @@ import { drizzleInstaller } from "./drizzle.js";
 import { nextAuthInstaller } from "./next-auth.js";
 import { trpcInstaller } from "./trpc.js";
 import { shadcnInstaller } from "./shadcn.js";
-import { type Packages } from "../helpers/prompts.js";
+import { type Packages } from "@/commands/common/prompts.js";
 
 export const mapPackages = (packages: Packages) => ({
   drizzle: {
