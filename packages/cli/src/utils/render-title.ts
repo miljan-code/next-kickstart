@@ -10,6 +10,5 @@ const theme = {
 export const renderTitle = () => {
   const titleGradient = gradient(Object.values(theme));
 
-  // TODO: test with bun, pnpm and yarn
   console.log(titleGradient.multiline(TITLE_TEXT));
 };

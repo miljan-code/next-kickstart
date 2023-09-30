@@ -5,6 +5,8 @@ import { getPackagesList } from "./helpers/get-package-list.js";
 import { addPackage } from "./helpers/add-package.js";
 
 export const addAction = async (pkg: string | undefined) => {
+  console.log("");
+
   const pkgName = checkArgument(pkg);
   const packages = getPackagesList(pkgName);
 

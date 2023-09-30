@@ -11,7 +11,6 @@ import {
   pkgScripts,
 } from "@/commands/common/update-json-scripts.js";
 import { updateKickstartConfig } from "@/commands/common/update-kickstart-config.js";
-import { updateEnv } from "@/commands/common/update-env.js";
 import { logger } from "@/utils/logger.js";
 import { PKG_ROOT } from "@/constants.js";
 import { type InstallPackagesOpts } from "@/commands/init/helpers/install-packages.js";
@@ -26,21 +25,23 @@ export const drizzleInstaller = async ({
   const drizzleDest = path.join(projectDir, drizzleFolderName);
   const pathExist = fs.pathExistsSync(drizzleDest);
   if (pathExist) {
-    const shouldContinue = await confirm({
+    const shouldOverwrite = await confirm({
       message: chalk.red.bold(
         `Drizzle's "db" folder already exist. Are you sure you want to overwrite existing files?`,
       ),
       initialValue: false,
     });
 
-    if (shouldContinue) return;
+    if (!shouldOverwrite) {
+      const newFolderName = await text({
+        message: "Enter a folder name where you want to add drizzle files",
+      });
 
-    const newFolderName = await text({
-      message: "Enter a folder name where you want to add drizzle files",
-    });
+      if (typeof newFolderName === "symbol") process.exit(0);
+      drizzleFolderName = newFolderName.split(" ").join("-");
+    }
 
-    if (typeof newFolderName === "symbol") process.exit(0);
-    drizzleFolderName = newFolderName.split(" ").join("-");
+    console.log("");
   }
 
   // Install package dependencies
@@ -53,13 +54,24 @@ export const drizzleInstaller = async ({
   await depInstaller({ projectDir, deps: devDeps, isDev: true });
 
   loader.stop();
-  logger.info(`Dependencies has been installed successfully\n`);
+  logger.success(`Dependencies has been installed successfully.`);
 
   // Copy configuration files
   const drizzleDir = path.join(PKG_ROOT, "template/libs/drizzle");
 
   const configSrc = path.join(drizzleDir, "drizzle.config.ts");
   const configDest = path.join(projectDir, "drizzle.config.ts");
+  if (drizzleFolderName !== "db") {
+    // Update drizzle.config.ts if folderName !== 'db'
+    const configContent = fs.readFileSync(configSrc, "utf-8");
+    const updatedContent = configContent.replaceAll(
+      "db/",
+      `${drizzleFolderName}/`,
+    );
+    fs.writeFileSync(configDest, updatedContent, "utf-8");
+  } else {
+    fs.copySync(configSrc, configDest);
+  }
 
   const clientSrc = path.join(drizzleDir, "db/index.ts");
   const clientDest = path.join(projectDir, drizzleFolderName, "index.ts");
@@ -75,11 +87,10 @@ export const drizzleInstaller = async ({
     "schema/index.ts",
   );
 
-  fs.copySync(configSrc, configDest);
   fs.copySync(clientSrc, clientDest);
   fs.copySync(schemaSrc, schemaDest);
 
-  logger.info("Package configuration is successfully scaffolded.");
+  logger.success("Package setup files are successfully scaffolded.");
 
   // Add migration generation script
   const pkgJsonPath = path.join(projectDir, "package.json");
@@ -88,6 +99,8 @@ export const drizzleInstaller = async ({
   // Update next-kickstarter config
   updateKickstartConfig(projectDir, "drizzle");
 
-  // Add to ENV ? NOTE:
-  updateEnv(projectDir, "drizzle");
+  // Next steps
+  logger.info("\nNext steps:");
+  logger.info("  1. Add supabase connection URL to .env");
+  logger.info("  2. Pass that env variable to env.mjs");
 };
