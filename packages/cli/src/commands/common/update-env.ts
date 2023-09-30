@@ -2,21 +2,22 @@ import path from "node:path";
 import fs from "fs-extra";
 
 import { PKG_ROOT } from "@/constants.js";
-import { type InstallPackagesOpts } from "./install-packages.js";
+import { type InstallPackagesOpts } from "../init/helpers/install-packages.js";
+import { type AvailablePackage } from "@/commands/add/helpers/check-argument.js";
+
+const envVariables = {
+  drizzle: {
+    DATABASE_URL: `"postgresql://[username]:[password]@host/postgres"\n`,
+  },
+  nextauth: {
+    NEXTAUTH_URL: `"http://localhost:3000"\n`,
+    NEXTAUTH_SECRET: `""\n`,
+    GOOGLE_CLIENT_ID: `""\n`,
+    GOOGLE_CLIENT_SECRET: `""\n`,
+  },
+};
 
 export const createEnv = ({ packages, projectDir }: InstallPackagesOpts) => {
-  const envVariables = {
-    drizzle: {
-      DATABASE_URL: `"postgresql://[username]:[password]@host/postgres"\n`,
-    },
-    nextauth: {
-      NEXTAUTH_URL: `"http://localhost:3000"\n`,
-      NEXTAUTH_SECRET: `""\n`,
-      GOOGLE_CLIENT_ID: `""\n`,
-      GOOGLE_CLIENT_SECRET: `""\n`,
-    },
-  };
-
   let envContent = "";
 
   if (packages.drizzle) {
@@ -49,3 +50,5 @@ export const createEnv = ({ packages, projectDir }: InstallPackagesOpts) => {
 
   fs.copySync(t3EnvSrc, t3EnvDest);
 };
+
+export const updateEnv = (projectDir: string, pkg: AvailablePackage) => {};

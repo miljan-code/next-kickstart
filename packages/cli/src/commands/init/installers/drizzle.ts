@@ -1,9 +1,12 @@
 import path from "node:path";
 import fs from "fs-extra";
-import { type PackageJson } from "type-fest";
 
 import { InstallPackagesOpts } from "../helpers/install-packages.js";
 import { addPackageDeps } from "@/commands/common/add-package-deps.js";
+import {
+  addScriptsToPkgJSON,
+  pkgScripts,
+} from "@/commands/common/update-json-scripts.js";
 import { PKG_ROOT } from "@/constants.js";
 import { type Dependency } from "@/commands/common/dependencies.js";
 
@@ -25,12 +28,7 @@ export const drizzleInstaller = ({
   });
 
   // 2. add generate script to package.json
-  const pkgJson = fs.readJSONSync(pkgJsonPath) as PackageJson;
-  pkgJson.scripts = {
-    ...pkgJson.scripts,
-    "db:generate": "drizzle-kit generate:pg --config=drizzle.config.ts",
-  };
-  fs.writeJSONSync(pkgJsonPath, pkgJson, { spaces: 2 });
+  addScriptsToPkgJSON(pkgJsonPath, pkgScripts.drizzle);
 
   // 3. get paths of files to copy
   const drizzleDir = path.join(PKG_ROOT, "template/libs/drizzle");

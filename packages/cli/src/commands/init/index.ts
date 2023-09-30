@@ -1,17 +1,17 @@
 import { Command } from "commander";
 import { z } from "zod";
 
-import { generateStarter } from "./helpers/generate-starter.js";
-import { parsePath } from "./helpers/parse-path.js";
 import {
   checkPackages,
   checkInstalls,
   getProjectName,
 } from "../common/prompts.js";
+import { generateKickstartConfig } from "../common/update-kickstart-config.js";
+import { generateStarter } from "./helpers/generate-starter.js";
+import { parsePath } from "./helpers/parse-path.js";
 import { installPackages } from "./helpers/install-packages.js";
-import { createEnv } from "./helpers/create-env.js";
+import { createEnv } from "../common/update-env.js";
 import { installDeps } from "./helpers/install-deps.js";
-import { generateKickstartConfig } from "./helpers/generate-kickstart-config.js";
 import { printNextSteps } from "./helpers/print-next-steps.js";
 import { logger } from "@/utils/logger.js";
 import { renderTitle } from "@/utils/render-title.js";
