@@ -6,7 +6,7 @@ import chalk from "chalk";
 import { logger } from "@/utils/logger.js";
 import { getUserPkgExec } from "@/utils/get-user-pkg-manager.js";
 import { type AvailablePackage } from "./check-argument.js";
-import { type Packages } from "@/commands/init/helpers/prompts.js";
+import { type Packages } from "@/commands/common/prompts.js";
 
 export const getPackagesList = (pkg: AvailablePackage) => {
   const pkgExec = getUserPkgExec();

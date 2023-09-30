@@ -7,14 +7,14 @@ import {
   checkPackages,
   checkInstalls,
   getProjectName,
-} from "./helpers/prompts.js";
+} from "../common/prompts.js";
 import { installPackages } from "./helpers/install-packages.js";
 import { createEnv } from "./helpers/create-env.js";
 import { installDeps } from "./helpers/install-deps.js";
 import { generateKickstartConfig } from "./helpers/generate-kickstart-config.js";
+import { printNextSteps } from "./helpers/print-next-steps.js";
 import { logger } from "@/utils/logger.js";
 import { renderTitle } from "@/utils/render-title.js";
-import { printNextSteps } from "./helpers/print-next-steps.js";
 
 const ALL_PACKAGES = {
   drizzle: true,
@@ -43,19 +43,10 @@ export const initAction = async (dir: string | undefined, opts: string) => {
   const initGit = installs.git;
   const shouldInstallDeps = installs.deps;
 
-  // Generate starter next app
   await generateStarter({ projectDir, projectName, initGit });
-
-  // Add packages
   installPackages({ projectDir, packages });
-
-  // Create ENV files
   createEnv({ projectDir, packages });
-
-  // Generate config JSON file
   generateKickstartConfig({ projectDir, packages });
-
-  // Install deps
   if (shouldInstallDeps) await installDeps(projectDir);
 
   logger.info("Project has been successfully initialized");

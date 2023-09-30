@@ -1,10 +1,10 @@
 import path from "node:path";
 import fs from "fs-extra";
 
-import { addPackageDeps } from "../helpers/add-package-deps.js";
 import { InstallPackagesOpts } from "../helpers/install-packages.js";
+import { addPackageDeps } from "@/commands/common/add-package-deps.js";
 import { PKG_ROOT } from "@/constants.js";
-import { type Dependency } from "./dependencies.js";
+import { type Dependency } from "@/commands/common/dependencies.js";
 
 export const nextAuthInstaller = ({
   projectDir,
