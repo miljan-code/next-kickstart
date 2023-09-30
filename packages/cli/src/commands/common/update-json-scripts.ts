@@ -1,6 +1,7 @@
-import { getUserPkgExec } from "@/utils/get-user-pkg-manager.js";
 import fs from "fs-extra";
 import { type PackageJson } from "type-fest";
+
+import { getUserPkgExec } from "@/utils/get-user-pkg-manager.js";
 
 export const pkgScripts = () => {
   const pkgExec = getUserPkgExec();

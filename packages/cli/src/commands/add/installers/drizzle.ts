@@ -6,13 +6,13 @@ import chalk from "chalk";
 import ora from "ora";
 
 import { depInstaller } from "../helpers/dep-installer.js";
+import { fsDrizzle } from "@/commands/common/fs-helpers.js";
 import {
   addScriptsToPkgJSON,
   pkgScripts,
 } from "@/commands/common/update-json-scripts.js";
 import { updateKickstartConfig } from "@/commands/common/update-kickstart-config.js";
 import { logger } from "@/utils/logger.js";
-import { PKG_ROOT } from "@/constants.js";
 import { type InstallPackagesOpts } from "@/commands/init/helpers/install-packages.js";
 import { type Dependency } from "@/commands/common/dependencies.js";
 
@@ -41,7 +41,7 @@ export const drizzleInstaller = async ({
       drizzleFolderName = newFolderName.split(" ").join("-");
     }
 
-    console.log("");
+    logger.info("");
   }
 
   // Install package dependencies
@@ -57,39 +57,7 @@ export const drizzleInstaller = async ({
   logger.success(`Dependencies has been installed successfully.`);
 
   // Copy configuration files
-  const drizzleDir = path.join(PKG_ROOT, "template/libs/drizzle");
-
-  const configSrc = path.join(drizzleDir, "drizzle.config.ts");
-  const configDest = path.join(projectDir, "drizzle.config.ts");
-  if (drizzleFolderName !== "db") {
-    // Update drizzle.config.ts if folderName !== 'db'
-    const configContent = fs.readFileSync(configSrc, "utf-8");
-    const updatedContent = configContent.replaceAll(
-      "db/",
-      `${drizzleFolderName}/`,
-    );
-    fs.writeFileSync(configDest, updatedContent, "utf-8");
-  } else {
-    fs.copySync(configSrc, configDest);
-  }
-
-  const clientSrc = path.join(drizzleDir, "db/index.ts");
-  const clientDest = path.join(projectDir, drizzleFolderName, "index.ts");
-
-  const schemaSrc = path.join(
-    drizzleDir,
-    "db/schema",
-    packages.nextauth ? "index-auth.ts" : "index-base.ts",
-  );
-  const schemaDest = path.join(
-    projectDir,
-    drizzleFolderName,
-    "schema/index.ts",
-  );
-
-  fs.copySync(clientSrc, clientDest);
-  fs.copySync(schemaSrc, schemaDest);
-
+  fsDrizzle({ packages, projectDir, drizzleFolderName });
   logger.success("Package setup files are successfully scaffolded.");
 
   // Add migration generation script

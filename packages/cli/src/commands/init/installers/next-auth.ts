@@ -1,9 +1,8 @@
 import path from "node:path";
-import fs from "fs-extra";
 
-import { InstallPackagesOpts } from "../helpers/install-packages.js";
+import { fsNextAuth } from "@/commands/common/fs-helpers.js";
 import { addPackageDeps } from "@/commands/common/add-package-deps.js";
-import { PKG_ROOT } from "@/constants.js";
+import { type InstallPackagesOpts } from "../helpers/install-packages.js";
 import { type Dependency } from "@/commands/common/dependencies.js";
 
 export const nextAuthInstaller = ({
@@ -18,28 +17,5 @@ export const nextAuthInstaller = ({
   addPackageDeps({ deps, isDev: false, pkgJsonPath });
 
   // 2. get paths of files to copy
-  const nextAuthDir = path.join(PKG_ROOT, "template/libs/next-auth");
-
-  const authTypesSrc = path.join(nextAuthDir, "types/next-auth.d.ts");
-  const authTypesDest = path.join(projectDir, "types/next-auth.d.ts");
-
-  const authLibSrc = path.join(
-    nextAuthDir,
-    packages.drizzle ? "lib/auth-drizzle.ts" : "lib/auth-base.ts",
-  );
-  const authLibDest = path.join(projectDir, "lib/auth.ts");
-
-  const apiHandlerSrc = path.join(
-    nextAuthDir,
-    "app/api/auth/[...nextauth]/route.ts",
-  );
-  const apiHandlerDest = path.join(
-    projectDir,
-    "app/api/auth/[...nextauth]/route.ts",
-  );
-
-  // 3. copy files
-  fs.copySync(authTypesSrc, authTypesDest);
-  fs.copySync(authLibSrc, authLibDest);
-  fs.copySync(apiHandlerSrc, apiHandlerDest);
+  fsNextAuth({ projectDir, packages });
 };

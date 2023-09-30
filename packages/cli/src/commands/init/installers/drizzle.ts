@@ -9,6 +9,7 @@ import {
 } from "@/commands/common/update-json-scripts.js";
 import { PKG_ROOT } from "@/constants.js";
 import { type Dependency } from "@/commands/common/dependencies.js";
+import { fsDrizzle } from "@/commands/common/fs-helpers.js";
 
 export const drizzleInstaller = ({
   projectDir,
@@ -30,24 +31,6 @@ export const drizzleInstaller = ({
   // 2. add generate script to package.json
   addScriptsToPkgJSON(pkgJsonPath, pkgScripts().drizzle);
 
-  // 3. get paths of files to copy
-  const drizzleDir = path.join(PKG_ROOT, "template/libs/drizzle");
-
-  const configSrc = path.join(drizzleDir, "drizzle.config.ts");
-  const configDest = path.join(projectDir, "drizzle.config.ts");
-
-  const clientSrc = path.join(drizzleDir, "db/index.ts");
-  const clientDest = path.join(projectDir, "db/index.ts");
-
-  const schemaSrc = path.join(
-    drizzleDir,
-    "db/schema",
-    packages.nextauth ? "index-auth.ts" : "index-base.ts",
-  );
-  const schemaDest = path.join(projectDir, "db/schema/index.ts");
-
-  // 4. copy files
-  fs.copySync(configSrc, configDest);
-  fs.copySync(clientSrc, clientDest);
-  fs.copySync(schemaSrc, schemaDest);
+  // 3. copy files
+  fsDrizzle({ projectDir, packages });
 };
