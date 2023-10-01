@@ -6,6 +6,7 @@ import chalk from "chalk";
 import ora from "ora";
 
 import { depInstaller } from "../helpers/dep-installer.js";
+import { confirmPrompt } from "@/commands/common/prompts.js";
 import { fsDrizzle } from "@/commands/common/fs-helpers.js";
 import {
   addScriptsToPkgJSON,
@@ -40,15 +41,22 @@ export const drizzleInstaller = async ({
       if (typeof newFolderName === "symbol") process.exit(0);
       drizzleFolderName = newFolderName.split(" ").join("-");
     }
-
-    logger.info("");
   }
+  let withAuth = false;
+  if (packages.nextauth) {
+    withAuth = await confirmPrompt({
+      message: `Do you want to use NextAuth with Drizzle?\n${chalk.yellow(
+        `     This action will overwrite your current NextAuth configuration`,
+      )}`,
+    });
+  }
+  logger.info("");
 
   // Install package dependencies
   const loader = ora("Installing package dependencies").start();
   const deps: Dependency[] = ["drizzle-orm", "postgres"];
   const devDeps: Dependency[] = ["drizzle-kit", "dotenv"];
-  if (packages.nextauth) deps.push("@auth/core");
+  if (withAuth) deps.push("@auth/core", "@auth/drizzle-adapter");
 
   await depInstaller({ projectDir, deps, isDev: false });
   await depInstaller({ projectDir, deps: devDeps, isDev: true });
@@ -57,7 +65,7 @@ export const drizzleInstaller = async ({
   logger.success(`Dependencies has been installed successfully.`);
 
   // Copy configuration files
-  fsDrizzle({ packages, projectDir, drizzleFolderName });
+  fsDrizzle({ projectDir, drizzleFolderName, withAuth, cmd: "add" });
   logger.success("Package setup files are successfully scaffolded.");
 
   // Add migration generation script

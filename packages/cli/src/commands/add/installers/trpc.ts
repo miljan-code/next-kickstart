@@ -30,7 +30,7 @@ export const trpcInstaller = async ({
 
   // Copy configuration files
   fsTRPC({ projectDir, packages });
-  logger.success("Package setup files are successfully scaffolded.");
+  logger.success("Package setup files are successfully scaffolded.\n");
 
   // Update next-kickstarter config
   updateKickstartConfig(projectDir, "trpc");

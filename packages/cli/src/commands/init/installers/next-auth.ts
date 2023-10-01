@@ -17,5 +17,5 @@ export const nextAuthInstaller = ({
   addPackageDeps({ deps, isDev: false, pkgJsonPath });
 
   // 2. get paths of files to copy
-  fsNextAuth({ projectDir, packages });
+  fsNextAuth({ projectDir, withDrizzle: packages.drizzle });
 };

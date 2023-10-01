@@ -1,15 +1,13 @@
 import path from "node:path";
-import fs from "fs-extra";
 
-import { InstallPackagesOpts } from "../helpers/install-packages.js";
+import { fsDrizzle } from "@/commands/common/fs-helpers.js";
 import { addPackageDeps } from "@/commands/common/add-package-deps.js";
 import {
   addScriptsToPkgJSON,
   pkgScripts,
 } from "@/commands/common/update-json-scripts.js";
-import { PKG_ROOT } from "@/constants.js";
 import { type Dependency } from "@/commands/common/dependencies.js";
-import { fsDrizzle } from "@/commands/common/fs-helpers.js";
+import { type InstallPackagesOpts } from "../helpers/install-packages.js";
 
 export const drizzleInstaller = ({
   projectDir,
@@ -32,5 +30,5 @@ export const drizzleInstaller = ({
   addScriptsToPkgJSON(pkgJsonPath, pkgScripts().drizzle);
 
   // 3. copy files
-  fsDrizzle({ projectDir, packages });
+  fsDrizzle({ projectDir, withAuth: packages.nextauth });
 };

@@ -1,6 +1,7 @@
 import { mapPackages } from "../installers/index.js";
 import { type Packages } from "@/commands/common/prompts.js";
 import { type AvailablePackage } from "./check-argument.js";
+import { addProviders } from "./add-providers.js";
 
 interface AddPackageOpts {
   packages: Packages;
@@ -12,4 +13,5 @@ export const addPackage = async ({ packages, pkgName }: AddPackageOpts) => {
   const projectDir = process.cwd();
 
   await mappedPkgs[pkgName]({ packages, projectDir });
+  addProviders({ pkgName, projectDir });
 };
