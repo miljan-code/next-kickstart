@@ -10,17 +10,6 @@ export const providersInstaller = ({
 }: InstallPackagesOpts) => {
   const providersDir = path.join(PKG_ROOT, "template/libs/providers");
 
-  const layoutFile =
-    packages.trpc && packages.nextauth
-      ? "layout-with-trpc-auth.tsx"
-      : packages.trpc
-      ? "layout-with-trpc.tsx"
-      : packages.nextauth
-      ? "layout-with-auth.tsx"
-      : "layout-base.tsx";
-  const layoutSrc = path.join(providersDir, "app/", layoutFile);
-  const layoutDest = path.join(projectDir, "app/layout.tsx");
-
   if (packages.nextauth) {
     const authProviderSrc = path.join(
       providersDir,
@@ -44,5 +33,24 @@ export const providersInstaller = ({
     fs.copySync(trpcProviderSrc, trpcProviderDest);
   }
 
-  fs.copySync(layoutSrc, layoutDest);
+  const providersDest = path.join(projectDir, "components/providers/index.tsx");
+  if (packages.nextauth && packages.trpc) {
+    const providersSrc = path.join(
+      providersDir,
+      "components/providers/index-auth-trpc.tsx",
+    );
+    fs.copySync(providersSrc, providersDest);
+  } else if (packages.nextauth) {
+    const providersSrc = path.join(
+      providersDir,
+      "components/providers/index-auth.tsx",
+    );
+    fs.copySync(providersSrc, providersDest);
+  } else if (packages.trpc) {
+    const providersSrc = path.join(
+      providersDir,
+      "components/providers/index-trpc.tsx",
+    );
+    fs.copySync(providersSrc, providersDest);
+  } else return;
 };

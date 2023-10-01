@@ -2,7 +2,7 @@ import path from "node:path";
 
 import fs from "fs-extra";
 
-import { writeContent } from "../add/helpers/write-content.js";
+import { copyContent, replaceContent } from "../add/helpers/content-fs.js";
 import { PKG_ROOT } from "@/constants.js";
 import { type Packages } from "./prompts.js";
 
@@ -25,12 +25,7 @@ export const fsDrizzle = ({
   const configDest = path.join(projectDir, "drizzle.config.ts");
   if (drizzleFolderName !== "db") {
     // Update drizzle.config.ts if folderName !== 'db'
-    const configContent = fs.readFileSync(configSrc, "utf-8");
-    const updatedContent = configContent.replaceAll(
-      "db/",
-      `${drizzleFolderName}/`,
-    );
-    fs.writeFileSync(configDest, updatedContent, "utf-8");
+    replaceContent(configSrc, configDest, "db/", `${drizzleFolderName}/`);
   } else {
     fs.copySync(configSrc, configDest);
   }
@@ -57,12 +52,7 @@ export const fsDrizzle = ({
     const authLibSrc = path.join(nextAuthDir, "lib/auth-drizzle.ts");
     const authLibDest = path.join(projectDir, "lib/auth.ts");
     if (drizzleFolderName !== "db") {
-      const authLibContent = fs.readFileSync(authLibSrc, "utf-8");
-      const updatedContent = authLibContent.replaceAll(
-        "/db",
-        `/${drizzleFolderName}`,
-      );
-      fs.writeFileSync(authLibDest, updatedContent, "utf-8");
+      replaceContent(authLibSrc, authLibDest, "/db", `/${drizzleFolderName}`);
     } else {
       fs.copySync(authLibSrc, authLibDest);
     }
@@ -134,7 +124,7 @@ export const fsShadcn = ({
 
   if (cmd === "add") {
     const utilsExists = fs.pathExistsSync(utilsDest);
-    if (utilsExists) writeContent(utilsSrc, utilsDest);
+    if (utilsExists) copyContent(utilsSrc, utilsDest);
     else fs.copySync(utilsSrc, utilsDest);
   }
   if (cmd === "init" && !packages?.trpc) {
