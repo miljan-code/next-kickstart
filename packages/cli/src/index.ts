@@ -27,5 +27,3 @@ function main() {
 }
 
 main();
-
-// TEST: TODO:
