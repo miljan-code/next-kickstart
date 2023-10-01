@@ -2,16 +2,25 @@ import path from "node:path";
 
 import fs from "fs-extra";
 
-import { copyContent, replaceContent } from "../add/helpers/content-fs.js";
+import {
+  copyContent,
+  replaceContent,
+  writeAfterLastImport,
+} from "../add/helpers/content-fs.js";
 import { PKG_ROOT } from "@/constants.js";
 import { type Packages } from "./prompts.js";
+
+type CMD = "add" | "init";
 
 interface FsDrizzleOpts {
   projectDir: string;
   drizzleFolderName?: string;
   withAuth: boolean;
-  cmd?: "init" | "add";
+  cmd?: CMD;
 }
+
+const drizzleDir = path.join(PKG_ROOT, "template/libs/drizzle");
+const nextAuthDir = path.join(PKG_ROOT, "template/libs/next-auth");
 
 export const fsDrizzle = ({
   projectDir,
@@ -19,8 +28,6 @@ export const fsDrizzle = ({
   withAuth,
   cmd = "init",
 }: FsDrizzleOpts) => {
-  const drizzleDir = path.join(PKG_ROOT, "template/libs/drizzle");
-
   const configSrc = path.join(drizzleDir, "drizzle.config.ts");
   const configDest = path.join(projectDir, "drizzle.config.ts");
   if (drizzleFolderName !== "db") {
@@ -48,7 +55,6 @@ export const fsDrizzle = ({
   fs.copySync(schemaSrc, schemaDest);
 
   if (withAuth && cmd === "add") {
-    const nextAuthDir = path.join(PKG_ROOT, "template/libs/next-auth");
     const authLibSrc = path.join(nextAuthDir, "lib/auth-drizzle.ts");
     const authLibDest = path.join(projectDir, "lib/auth.ts");
     if (drizzleFolderName !== "db") {
@@ -61,18 +67,23 @@ export const fsDrizzle = ({
 
 interface FsNextAuthOpts {
   projectDir: string;
-  packages: Packages;
+  withDrizzle: boolean;
+  cmd?: CMD;
+  drizzleFolderName?: string;
 }
 
-export const fsNextAuth = ({ projectDir, packages }: FsNextAuthOpts) => {
-  const nextAuthDir = path.join(PKG_ROOT, "template/libs/next-auth");
-
+export const fsNextAuth = ({
+  projectDir,
+  withDrizzle,
+  cmd = "init",
+  drizzleFolderName = "db",
+}: FsNextAuthOpts) => {
   const authTypesSrc = path.join(nextAuthDir, "types/next-auth.d.ts");
   const authTypesDest = path.join(projectDir, "types/next-auth.d.ts");
 
   const authLibSrc = path.join(
     nextAuthDir,
-    packages.drizzle ? "lib/auth-drizzle.ts" : "lib/auth-base.ts",
+    withDrizzle ? "lib/auth-drizzle.ts" : "lib/auth-base.ts",
   );
   const authLibDest = path.join(projectDir, "lib/auth.ts");
 
@@ -88,13 +99,24 @@ export const fsNextAuth = ({ projectDir, packages }: FsNextAuthOpts) => {
   fs.copySync(authTypesSrc, authTypesDest);
   fs.copySync(authLibSrc, authLibDest);
   fs.copySync(apiHandlerSrc, apiHandlerDest);
+
+  if (withDrizzle && cmd === "add") {
+    const schemaSrc = path.join(drizzleDir, "db/schema", "index-auth.ts");
+    const schemaDest = path.join(
+      projectDir,
+      drizzleFolderName,
+      "schema/index.ts",
+    );
+    const importContent = fs.readFileSync(schemaSrc, "utf-8");
+    writeAfterLastImport(schemaDest, importContent);
+  }
 };
 
 interface FsShadcnOpts {
   projectDir: string;
   packages?: Packages;
   globalsFolder?: string;
-  cmd?: "add" | "init";
+  cmd?: CMD;
 }
 
 export const fsShadcn = ({

@@ -64,6 +64,12 @@ export const overwritePrompt = async (msg: string) => {
   if (!shouldOverwrite || typeof shouldOverwrite === "symbol") process.exit(0);
 };
 
+export const confirmPrompt = async ({ message }: { message: string }) => {
+  const prompt = await confirm({ message });
+  if (typeof prompt === "symbol") process.exit(0);
+  return prompt;
+};
+
 const getProjectNamePrompt = async () => {
   const prompt = await text({
     message: "What will your project be called?",

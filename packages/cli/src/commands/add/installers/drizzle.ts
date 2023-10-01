@@ -6,6 +6,7 @@ import chalk from "chalk";
 import ora from "ora";
 
 import { depInstaller } from "../helpers/dep-installer.js";
+import { confirmPrompt } from "@/commands/common/prompts.js";
 import { fsDrizzle } from "@/commands/common/fs-helpers.js";
 import {
   addScriptsToPkgJSON,
@@ -43,13 +44,11 @@ export const drizzleInstaller = async ({
   }
   let withAuth = false;
   if (packages.nextauth) {
-    const prompt = await confirm({
+    withAuth = await confirmPrompt({
       message: `Do you want to use NextAuth with Drizzle?\n${chalk.yellow(
         `     This action will overwrite your current NextAuth configuration`,
       )}`,
     });
-    if (typeof prompt === "symbol") process.exit(0);
-    withAuth = prompt;
   }
   logger.info("");
 
