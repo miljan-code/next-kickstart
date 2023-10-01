@@ -10,12 +10,14 @@ interface FsDrizzleOpts {
   projectDir: string;
   drizzleFolderName?: string;
   withAuth: boolean;
+  cmd?: "init" | "add";
 }
 
 export const fsDrizzle = ({
   projectDir,
   drizzleFolderName = "db",
   withAuth,
+  cmd = "init",
 }: FsDrizzleOpts) => {
   const drizzleDir = path.join(PKG_ROOT, "template/libs/drizzle");
 
@@ -47,7 +49,10 @@ export const fsDrizzle = ({
     "schema/index.ts",
   );
 
-  if (withAuth) {
+  fs.copySync(clientSrc, clientDest);
+  fs.copySync(schemaSrc, schemaDest);
+
+  if (withAuth && cmd === "add") {
     const nextAuthDir = path.join(PKG_ROOT, "template/libs/next-auth");
     const authLibSrc = path.join(nextAuthDir, "lib/auth-drizzle.ts");
     const authLibDest = path.join(projectDir, "lib/auth.ts");
@@ -62,9 +67,6 @@ export const fsDrizzle = ({
       fs.copySync(authLibSrc, authLibDest);
     }
   }
-
-  fs.copySync(clientSrc, clientDest);
-  fs.copySync(schemaSrc, schemaDest);
 };
 
 interface FsNextAuthOpts {

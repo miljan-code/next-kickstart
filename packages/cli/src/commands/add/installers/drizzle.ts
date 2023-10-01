@@ -66,7 +66,7 @@ export const drizzleInstaller = async ({
   logger.success(`Dependencies has been installed successfully.`);
 
   // Copy configuration files
-  fsDrizzle({ projectDir, drizzleFolderName, withAuth });
+  fsDrizzle({ projectDir, drizzleFolderName, withAuth, cmd: "add" });
   logger.success("Package setup files are successfully scaffolded.");
 
   // Add migration generation script
