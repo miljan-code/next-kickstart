@@ -40,15 +40,24 @@ export const drizzleInstaller = async ({
       if (typeof newFolderName === "symbol") process.exit(0);
       drizzleFolderName = newFolderName.split(" ").join("-");
     }
-
-    logger.info("");
   }
+  let withAuth = false;
+  if (packages.nextauth) {
+    const prompt = await confirm({
+      message: `Do you want to use NextAuth with Drizzle?\n${chalk.yellow(
+        `     This action will overwrite your current NextAuth configuration`,
+      )}`,
+    });
+    if (typeof prompt === "symbol") process.exit(0);
+    withAuth = prompt;
+  }
+  logger.info("");
 
   // Install package dependencies
   const loader = ora("Installing package dependencies").start();
   const deps: Dependency[] = ["drizzle-orm", "postgres"];
   const devDeps: Dependency[] = ["drizzle-kit", "dotenv"];
-  if (packages.nextauth) deps.push("@auth/core");
+  if (withAuth) deps.push("@auth/core", "@auth/drizzle-adapter");
 
   await depInstaller({ projectDir, deps, isDev: false });
   await depInstaller({ projectDir, deps: devDeps, isDev: true });
@@ -57,7 +66,7 @@ export const drizzleInstaller = async ({
   logger.success(`Dependencies has been installed successfully.`);
 
   // Copy configuration files
-  fsDrizzle({ packages, projectDir, drizzleFolderName });
+  fsDrizzle({ projectDir, drizzleFolderName, withAuth });
   logger.success("Package setup files are successfully scaffolded.");
 
   // Add migration generation script

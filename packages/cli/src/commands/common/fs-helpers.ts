@@ -9,13 +9,13 @@ import { type Packages } from "./prompts.js";
 interface FsDrizzleOpts {
   projectDir: string;
   drizzleFolderName?: string;
-  packages: Packages;
+  withAuth: boolean;
 }
 
 export const fsDrizzle = ({
   projectDir,
   drizzleFolderName = "db",
-  packages,
+  withAuth,
 }: FsDrizzleOpts) => {
   const drizzleDir = path.join(PKG_ROOT, "template/libs/drizzle");
 
@@ -39,13 +39,29 @@ export const fsDrizzle = ({
   const schemaSrc = path.join(
     drizzleDir,
     "db/schema",
-    packages.nextauth ? "index-auth.ts" : "index-base.ts",
+    withAuth ? "index-auth.ts" : "index-base.ts",
   );
   const schemaDest = path.join(
     projectDir,
     drizzleFolderName,
     "schema/index.ts",
   );
+
+  if (withAuth) {
+    const nextAuthDir = path.join(PKG_ROOT, "template/libs/next-auth");
+    const authLibSrc = path.join(nextAuthDir, "lib/auth-drizzle.ts");
+    const authLibDest = path.join(projectDir, "lib/auth.ts");
+    if (drizzleFolderName !== "db") {
+      const authLibContent = fs.readFileSync(authLibSrc, "utf-8");
+      const updatedContent = authLibContent.replaceAll(
+        "/db",
+        `/${drizzleFolderName}`,
+      );
+      fs.writeFileSync(authLibDest, updatedContent, "utf-8");
+    } else {
+      fs.copySync(authLibSrc, authLibDest);
+    }
+  }
 
   fs.copySync(clientSrc, clientDest);
   fs.copySync(schemaSrc, schemaDest);
