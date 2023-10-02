@@ -68,22 +68,10 @@ commands and answer the command prompt questions:
 npx next-kickstart <folder name>
 ```
 
-### yarn
-
-```bash
-yarn next-kickstart <folder name>
-```
-
 ### pnpm
 
 ```bash
 pnpm dlx next-kickstart <folder name>
-```
-
-### bun
-
-```bash
-bunx next-kickstart <folder name>
 ```
 
 For more advanced usage, check out the
