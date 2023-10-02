@@ -12,7 +12,8 @@
 </h1>
 
 <p align="center">
-  All-in-one toolkit for full-stack, typesafe applications.
+  All-in-one toolkit for full-stack, typesafe applications.<br />
+  Building in public. PR's are welcome.
 </p>
 
 <p align="center">
