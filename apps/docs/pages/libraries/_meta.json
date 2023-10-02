@@ -1,3 +1,14 @@
 {
-  "nextjs": "Next.JS"
+  "nextjs": "Next.JS",
+  "typescript": "TypeScript",
+  "trpc": "tRPC",
+  "drizzle": "Drizzle ORM",
+  "supabase": "Supabase",
+  "nextauth": "NextAuth",
+  "t3-env": "T3 Env",
+  "tailwind": "TailwindCSS",
+  "shadcn": "ShadCN/ui",
+  "zod": "Zod",
+  "eslint": "ESLint",
+  "prettier": "Prettier"
 }
