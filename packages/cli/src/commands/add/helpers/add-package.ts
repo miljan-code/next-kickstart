@@ -1,4 +1,4 @@
-import { addProviders } from "./add-providers.js";
+import { addProviders } from "../../common/add-providers.js";
 import { mapPackages } from "../installers/index.js";
 import { type Packages } from "@/commands/common/prompts.js";
 import { type AvailablePackage } from "./check-argument.js";

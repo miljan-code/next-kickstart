@@ -2,9 +2,12 @@ import path from "node:path";
 
 import fs from "fs-extra";
 
-import { replaceContent, writeAfterLastImport } from "./content-fs.js";
+import {
+  replaceContent,
+  writeAfterLastImport,
+} from "../add/helpers/content-fs.js";
 import { PKG_ROOT } from "@/constants.js";
-import { type AvailablePackage } from "./check-argument.js";
+import { type AvailablePackage } from "../add/helpers/check-argument.js";
 
 interface AddProvidersOpts {
   pkgName: AvailablePackage;

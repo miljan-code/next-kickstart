@@ -2,7 +2,7 @@ import ora from "ora";
 import chalk from "chalk";
 
 import { mapPackages } from "../installers/index.js";
-import { addProviders } from "@/commands/add/helpers/add-providers.js";
+import { addProviders } from "@/commands/common/add-providers.js";
 import { type Packages } from "@/commands/common/prompts.js";
 import { type AvailablePackage } from "@/commands/add/helpers/check-argument.js";
 
