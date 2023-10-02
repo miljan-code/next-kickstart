@@ -1,9 +1,10 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Copy } from "lucide-react";
 
 type IconProps = React.HTMLAttributes<SVGElement>;
 
 export const Icons = {
   arrowRight: ArrowRight,
+  copy: Copy,
   github: (props: IconProps) => (
     <svg viewBox="0 0 438.549 438.549" {...props}>
       <path
