@@ -5,8 +5,8 @@ import postgres from "postgres";
 import * as schema from "./schema";
 import { env } from "@/env.mjs";
 
-const client = postgres(env.DATABASE_URL);
+const client = postgres(env.DATABASE_URL, { onnotice: () => null });
 
 export const db = drizzle(client, { schema });
 
-await migrate(db, { migrationsFolder: "./migrations" });
+await migrate(db, { migrationsFolder: "db/migrations" });

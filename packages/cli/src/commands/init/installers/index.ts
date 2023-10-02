@@ -9,7 +9,7 @@ export const mapPackages = (packages: Packages) => ({
     added: packages.drizzle,
     install: drizzleInstaller,
   },
-  nextAuth: {
+  nextauth: {
     added: packages.nextauth,
     install: nextAuthInstaller,
   },
