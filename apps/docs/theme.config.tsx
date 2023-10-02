@@ -6,9 +6,6 @@ const config: DocsThemeConfig = {
   project: {
     link: "https://github.com/miljan-code/next-kickstart",
   },
-  chat: {
-    link: "https://discord.com",
-  },
   docsRepositoryBase: "https://github.com/miljan-code/next-kickstart",
   footer: {
     text: "Next Kickstart Docs",
