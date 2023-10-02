@@ -44,7 +44,7 @@ export const nextauthInstaller = async ({
 
   // Install package dependencies
   const deps: Dependency[] = ["next-auth"];
-  if (withDrizzle) deps.push("@auth/drizzle-adapter");
+  if (withDrizzle) deps.push("@auth/drizzle-adapter", "@auth/core");
 
   const loader = ora("Installing package dependencies").start();
   await depInstaller({ projectDir, deps, isDev: false });

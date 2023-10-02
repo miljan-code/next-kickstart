@@ -52,7 +52,7 @@ export const initAction = async (dir: string | undefined, opts: string) => {
   const pkgManager = getUserPkgManager();
   logger.info("Project has been successfully initialized");
   logger.info("\nNext steps:");
-  projectName !== "." && logger.info(`  cd ${projectName}`);
+  dirName !== "." && logger.info(`  cd ${projectName}`);
   if (!shouldInstallDeps) logger.info(`  ${pkgManager} install`);
   if (packages.drizzle) logger.info(`  ${pkgManager} run db:generate`);
   logger.info(`  ${pkgManager} run dev`);

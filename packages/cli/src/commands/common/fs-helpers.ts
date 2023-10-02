@@ -5,7 +5,7 @@ import fs from "fs-extra";
 import {
   copyContent,
   replaceContent,
-  writeAfterLastImport,
+  writeAtTheTopOfFile,
 } from "../add/helpers/content-fs.js";
 import { PKG_ROOT } from "@/constants.js";
 import { type Packages } from "./prompts.js";
@@ -43,14 +43,27 @@ export const fsDrizzle = ({
   const schemaSrc = path.join(
     drizzleDir,
     "db/schema",
-    withAuth ? "index-auth.ts" : "index-base.ts",
+    withAuth ? "auth.ts" : "example.ts",
   );
   const schemaDest = path.join(
+    projectDir,
+    drizzleFolderName,
+    "schema",
+    withAuth ? "auth.ts" : "example.ts",
+  );
+
+  const schemaIndexSrc = path.join(
+    drizzleDir,
+    "db/schema",
+    withAuth ? "index-auth.ts" : "index-example.ts",
+  );
+  const schemaIndexDest = path.join(
     projectDir,
     drizzleFolderName,
     "schema/index.ts",
   );
 
+  fs.copySync(schemaIndexSrc, schemaIndexDest);
   fs.copySync(clientSrc, clientDest);
   fs.copySync(schemaSrc, schemaDest);
 
@@ -101,14 +114,20 @@ export const fsNextAuth = ({
   fs.copySync(apiHandlerSrc, apiHandlerDest);
 
   if (withDrizzle && cmd === "add") {
-    const schemaSrc = path.join(drizzleDir, "db/schema", "index-auth.ts");
+    const schemaSrc = path.join(drizzleDir, "db/schema", "auth.ts");
     const schemaDest = path.join(
+      projectDir,
+      drizzleFolderName,
+      "schema/auth.ts",
+    );
+    fs.copySync(schemaSrc, schemaDest);
+    const schemaIndexDest = path.join(
       projectDir,
       drizzleFolderName,
       "schema/index.ts",
     );
-    const importContent = fs.readFileSync(schemaSrc, "utf-8");
-    writeAfterLastImport(schemaDest, importContent);
+    const indexContent = `export * from "./auth";`;
+    writeAtTheTopOfFile(schemaIndexDest, indexContent);
   }
 };
 

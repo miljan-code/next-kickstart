@@ -16,6 +16,14 @@ export const writeAfterLastImport = (path: string, content: string) => {
   fs.writeFileSync(path, updatedContent, "utf-8");
 };
 
+export const writeAtTheTopOfFile = (path: string, content: string) => {
+  const contentPath = fs.readFileSync(path, "utf-8");
+  const loc = contentPath.split("\n");
+  loc.splice(0, 0, content);
+  const updatedContent = loc.join("\n");
+  fs.writeFileSync(path, updatedContent, "utf-8");
+};
+
 export const replaceContent = (
   srcPath: string,
   destPath: string,
