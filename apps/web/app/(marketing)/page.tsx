@@ -30,7 +30,7 @@ export default function Home() {
           <br />
           applications
         </h2>
-        <Button className="gap-4 border border-primary/75 bg-button text-accent-foreground transition-colors hover:bg-button-hover">
+        <Button className="gap-4 border border-primary/25 bg-button text-accent-foreground transition-colors hover:bg-button-hover">
           <span>npx next-kickstart</span>
           <CopyCmdTooltip />
         </Button>
