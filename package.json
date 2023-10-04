@@ -8,7 +8,8 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "start:cli": "node packages/cli/dist/index.js",
     "ci": "pnpm --filter next-kickstart ci",
-    "release": "pnpm ci && changeset publish"
+    "release": "pnpm ci && changeset publish",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
@@ -16,5 +17,8 @@
     "prettier": "^3.0.3",
     "turbo": "latest"
   },
-  "packageManager": "pnpm@8.6.10"
+  "packageManager": "pnpm@8.6.10",
+  "dependencies": {
+    "husky": "^8.0.3"
+  }
 }
