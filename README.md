@@ -40,10 +40,10 @@
 
 <h2 id="about">Next Kickstart</h2>
 
-Next-Kickstart is an opinionated NextJS 13 (App Router) CLI template generator
+Next-Kickstart is an opinionated NextJS 13 (App Router) CLI toolkit
 that contains everything you need for developing a full-stack applications.
 
-It consists of:
+It includes:
 
 - [Next.js](https://nextjs.org)
 - [TypeScript](https://typescriptlang.org)
@@ -61,7 +61,7 @@ It consists of:
 <h2 id="getting-started">Getting Started</h2>
 
 To initialize a new `next-kickstart` application, run any of the following
-commands and answer the command prompt questions:
+commands and respond to the command prompts:
 
 ### npm
 
