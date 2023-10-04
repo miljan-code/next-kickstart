@@ -18,6 +18,10 @@ function main() {
     )
     .argument("[dir]", "directory to init a project")
     .option("-y, --yes", "skip confirmation prompt", false)
+    .option("--drizzle", "install with drizzle", false)
+    .option("--shadcn", "install with shadcn", false)
+    .option("--trpc", "install with trpc", false)
+    .option("--nextauth", "install with nextauth", false)
     .action(initAction);
 
   program.addCommand(init);

@@ -15,29 +15,29 @@ import { installDeps } from "./helpers/install-deps.js";
 import { logger } from "@/utils/logger.js";
 import { renderTitle } from "@/utils/render-title.js";
 import { getUserPkgManager } from "@/utils/get-user-pkg-manager.js";
-
-const ALL_PACKAGES = {
-  drizzle: true,
-  nextauth: true,
-  trpc: true,
-  shadcn: true,
-};
+import { mapPackageList } from "./helpers/map-package-list.js";
 
 const initOptionsSchema = z.object({
   yes: z.boolean(),
+  drizzle: z.boolean(),
+  nextauth: z.boolean(),
+  trpc: z.boolean(),
+  shadcn: z.boolean(),
 });
+
+export type Options = z.infer<typeof initOptionsSchema>;
 
 const initDirSchema = z.string().min(1);
 
-export const initAction = async (dir: string | undefined, opts: string) => {
+export const initAction = async (dir: string | undefined, opts: Options) => {
   renderTitle();
 
   const { projectName, dirName } = await getProjectName(dir);
-  const { yes: fullInstall } = initOptionsSchema.parse(opts);
+  initOptionsSchema.parse(opts);
   const initDir = initDirSchema.parse(dirName);
   const projectDir = parsePath(initDir);
 
-  const packages = fullInstall ? ALL_PACKAGES : await checkPackages();
+  const packages = await mapPackageList(opts);
   const installs = await checkInstalls();
 
   const initGit = installs.git;
@@ -65,4 +65,8 @@ export const init = new Command()
   .description("initialize new project")
   .argument("[dir]", "directory to init a project")
   .option("-y, --yes", "skip confirmation prompt", false)
+  .option("--drizzle", "install with drizzle", false)
+  .option("--shadcn", "install with shadcn", false)
+  .option("--trpc", "install with trpc", false)
+  .option("--nextauth", "install with nextauth", false)
   .action(initAction);
