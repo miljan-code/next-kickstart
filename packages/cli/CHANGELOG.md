@@ -1,5 +1,11 @@
 # next-kickstart
 
+## 0.2.0
+
+### Minor Changes
+
+- 96b5128: Next 14.1.0 upgrade
+
 ## 0.1.1
 
 ### Patch Changes
