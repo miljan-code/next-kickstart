@@ -20,7 +20,7 @@ export const dependencies = {
 
   // ShadCN/ui
   "@radix-ui/react-slot": "^1.0.2",
-  "class-variance-authority": "^0.8.0",
+  "class-variance-authority": "^0.7.0",
   clsx: "^2.1.0",
   "lucide-react": "^0.316.0",
   "tailwind-merge": "^2.2.1",
