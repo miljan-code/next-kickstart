@@ -7,7 +7,7 @@ export const dependencies = {
   "@auth/core": "^0.24.0",
 
   // NextAuth
-  "next-auth": "^4.24.51",
+  "next-auth": "^4.24.6",
   "@auth/drizzle-adapter": "^0.4.0",
 
   // tRPC
