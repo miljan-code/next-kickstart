@@ -15,27 +15,28 @@ const envVariables = {
     GOOGLE_CLIENT_ID: `""\n`,
     GOOGLE_CLIENT_SECRET: `""\n`,
   },
+  uploadthing: {
+    UPLOADTHING_SECRET: `""\n`,
+    UPLOADTHING_APP_ID: `""\n`,
+  },
 };
 
 export const createEnv = ({ packages, projectDir }: InstallPackagesOpts) => {
   let envContent = "";
 
-  if (packages.drizzle) {
-    for (const [key, value] of Object.entries(envVariables.drizzle)) {
+  for (const pkg of Object.keys(envVariables)) {
+    if (!packages[pkg as keyof typeof packages]) continue;
+    for (const [key, value] of Object.entries(
+      envVariables[pkg as keyof typeof envVariables],
+    )) {
       envContent += `${key}=${value}`;
     }
   }
 
-  if (packages.nextauth) {
-    for (const [key, value] of Object.entries(envVariables.nextauth)) {
-      envContent += `${key}=${value}`;
-    }
-  }
+  const envPath = path.join(projectDir, ".env.example");
+  fs.writeFileSync(envPath, envContent);
 
-  if (packages.drizzle || packages.nextauth) {
-    const envPath = path.join(projectDir, ".env.example");
-    fs.writeFileSync(envPath, envContent);
-  }
+  // TODO: add UT to t3ENV
 
   const t3EnvFile =
     packages.drizzle && packages.nextauth

@@ -237,3 +237,26 @@ export const fsTRPC = ({ projectDir, packages }: FsTRPCOpts) => {
   fs.copySync(trpcRoutersSrc, trpcRoutersDest);
   fs.copySync(trpcApiSrc, trpcApiDest);
 };
+
+interface FsUploadthingOpts {
+  projectDir: string;
+}
+
+export const fsUploadthing = ({ projectDir }: FsUploadthingOpts) => {
+  const utDir = path.join(PKG_ROOT, "template/libs/uploadthing");
+
+  const apiRoute = "app/api/uploadthing/";
+  const apiCoreSrc = path.join(utDir, apiRoute, "core.ts");
+  const apiCoreDest = path.join(projectDir, apiRoute, "core.ts");
+  const apiRouteSrc = path.join(utDir, apiRoute, "route.ts");
+  const apiRouteDest = path.join(projectDir, apiRoute, "route.ts");
+  const uploaderSrc = path.join(utDir, "components/uploader.tsx");
+  const uploaderDest = path.join(projectDir, "components/uploader.tsx");
+  const helpersSrc = path.join(utDir, "lib/uploadthing.ts");
+  const helpersDest = path.join(projectDir, "lib/uploadthing.ts");
+
+  fs.copySync(apiCoreSrc, apiCoreDest);
+  fs.copySync(apiRouteSrc, apiRouteDest);
+  fs.copySync(uploaderSrc, uploaderDest);
+  fs.copySync(helpersSrc, helpersDest);
+};

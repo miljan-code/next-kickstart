@@ -1,11 +1,7 @@
 import { Command } from "commander";
 import { z } from "zod";
 
-import {
-  checkPackages,
-  checkInstalls,
-  getProjectName,
-} from "../common/prompts.js";
+import { checkInstalls, getProjectName } from "../common/prompts.js";
 import { generateKickstartConfig } from "../common/update-kickstart-config.js";
 import { generateStarter } from "./helpers/generate-starter.js";
 import { parsePath } from "./helpers/parse-path.js";
@@ -69,4 +65,5 @@ export const init = new Command()
   .option("--shadcn", "install with shadcn", false)
   .option("--trpc", "install with trpc", false)
   .option("--nextauth", "install with nextauth", false)
+  .option("--uploadthing", "install with uploadthing", false)
   .action(initAction);
