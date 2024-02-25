@@ -3,6 +3,7 @@ import { nextAuthInstaller } from "./next-auth.js";
 import { trpcInstaller } from "./trpc.js";
 import { shadcnInstaller } from "./shadcn.js";
 import { type Packages } from "@/commands/common/prompts.js";
+import { uploadthingInstaller } from "./uploadthing.js";
 
 export const mapPackages = (packages: Packages) => ({
   drizzle: {
@@ -20,6 +21,10 @@ export const mapPackages = (packages: Packages) => ({
   shadcn: {
     added: packages.shadcn,
     install: shadcnInstaller,
+  },
+  uploadthing: {
+    added: packages.uploadthing,
+    install: uploadthingInstaller,
   },
 });
 

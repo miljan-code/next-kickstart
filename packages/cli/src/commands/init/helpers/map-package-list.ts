@@ -6,6 +6,7 @@ const ALL_PACKAGES = {
   nextauth: true,
   trpc: true,
   shadcn: true,
+  uploadthing: true,
 };
 
 export const mapPackageList = async (opts: Options): Promise<Packages> => {

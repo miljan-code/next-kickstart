@@ -25,6 +25,10 @@ export const dependencies = {
   "lucide-react": "^0.316.0",
   "tailwind-merge": "^2.2.1",
   "tailwindcss-animate": "^1.0.7",
+
+  // Uploadthing
+  uploadthing: "^6.4.1",
+  "@uploadthing/react": "^6.2.4",
 };
 
 export type Dependency = keyof typeof dependencies;

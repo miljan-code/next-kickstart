@@ -26,6 +26,11 @@ export async function checkPackages() {
           message: "Would you like to use ShadCN/ui?",
         });
       },
+      uploadthing: () => {
+        return confirm({
+          message: "Would you like to use Uploadthing?",
+        });
+      },
     },
     {
       onCancel() {
