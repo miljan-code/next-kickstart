@@ -10,7 +10,7 @@ export default function Home() {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
           <Link
             className="flex max-w-xs flex-col gap-4 rounded-xl bg-[#fff2] p-4 hover:bg-[#fff3]"
-            href="https://docs.kickstart.miljan.xyz"
+            href="https://kickstart-docs.vercel.app/"
             target="_blank"
           >
             <h3 className="text-xl font-bold">First Steps →</h3>
@@ -21,7 +21,7 @@ export default function Home() {
           </Link>
           <Link
             className="flex max-w-xs flex-col gap-4 rounded-xl bg-[#fff2] p-4 hover:bg-[#fff3]"
-            href="https://docs.kickstart.miljan.xyz"
+            href="https://kickstart-docs.vercel.app/"
             target="_blank"
           >
             <h3 className="text-xl font-bold">Documentation →</h3>

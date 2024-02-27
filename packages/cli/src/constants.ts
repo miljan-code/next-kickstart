@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 const __filename = fileURLToPath(import.meta.url);
 export const PKG_ROOT = path.join(path.dirname(__filename), "../");
 export const DEFAULT_APP_NAME = "next-kickstart";
+export const DOCS_URL = "https://kickstart-docs.vercel.app";
 export const TITLE_TEXT = ` _   ___      _        _             _   
 | | / (_)    | |      | |           | |  
 | |/ / _  ___| | _____| |_ __ _ _ __| |_ 

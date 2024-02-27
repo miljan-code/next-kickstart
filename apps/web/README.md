@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-  Get started with the <a rel="noopener noreferrer" target="_blank" href="https://kickstart.miljan.xyz">Next Kickstart</a> by running <code>npx next-kickstart</code>
+  Get started with the <a rel="noopener noreferrer" target="_blank" href="https://nextkickstart.vercel.app/">Next Kickstart</a> by running <code>npx next-kickstart</code>
 </p>
 
 <div align="center">
@@ -76,7 +76,7 @@ pnpm dlx next-kickstart <folder name>
 ```
 
 For more advanced usage, check out the
-[docs](https://docs.kickstart.miljan.xyz).
+[docs](https://kickstart-docs.vercel.app/).
 
 [downloads-image]:
   https://img.shields.io/npm/dm/next-kickstart?color=364fc7&logoColor=364fc7
