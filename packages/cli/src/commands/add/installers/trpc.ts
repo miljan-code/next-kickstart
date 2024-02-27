@@ -5,6 +5,7 @@ import { fsTRPC } from "@/commands/common/fs-helpers.js";
 import { depInstaller } from "../helpers/dep-installer.js";
 import { updateKickstartConfig } from "@/commands/common/update-kickstart-config.js";
 import { logger } from "@/utils/logger.js";
+import { DOCS_URL } from "@/constants.js";
 import { type InstallPackagesOpts } from "@/commands/init/helpers/install-packages.js";
 
 export const trpcInstaller = async ({
@@ -37,5 +38,5 @@ export const trpcInstaller = async ({
 
   // Next steps
   logger.info("Find out more about tRPC:");
-  logger.info(`  ${chalk.white("https://docs.kickstart.miljan.xyz")}`);
+  logger.info(`  ${chalk.white(DOCS_URL)}`);
 };

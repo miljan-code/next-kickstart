@@ -10,6 +10,7 @@ import { depInstaller } from "../helpers/dep-installer.js";
 import { updateKickstartConfig } from "@/commands/common/update-kickstart-config.js";
 import { confirmPrompt, overwritePrompt } from "@/commands/common/prompts.js";
 import { logger } from "@/utils/logger.js";
+import { DOCS_URL } from "@/constants.js";
 import { type InstallPackagesOpts } from "@/commands/init/helpers/install-packages.js";
 import { type Dependency } from "@/commands/common/dependencies.js";
 
@@ -61,9 +62,5 @@ export const nextauthInstaller = async ({
   // Next steps
   logger.info("\nNext steps:");
   logger.info(`  - Add Next-Auth environment variables to .env file`);
-  logger.info(
-    `    Find more here: ${chalk.white(
-      "https://docs.kickstart.miljan.xyz",
-    )} (ctrl+click)`,
-  );
+  logger.info(`    Find more here: ${chalk.white(DOCS_URL)}`);
 };

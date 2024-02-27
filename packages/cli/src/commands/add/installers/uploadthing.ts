@@ -6,6 +6,7 @@ import { depInstaller } from "../helpers/dep-installer.js";
 import { logger } from "@/utils/logger.js";
 import { fsUploadthing } from "@/commands/common/fs-helpers.js";
 import { updateKickstartConfig } from "@/commands/common/update-kickstart-config.js";
+import { DOCS_URL } from "@/constants.js";
 
 export const uploadthingInstaller = async ({
   packages,
@@ -29,5 +30,5 @@ export const uploadthingInstaller = async ({
 
   // Next steps
   logger.info("Find out more about Uploadthing:");
-  logger.info(`  ${chalk.white("https://docs.kickstart.miljan.xyz")}`);
+  logger.info(`  ${chalk.white(DOCS_URL)}`);
 };
